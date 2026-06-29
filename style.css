@@ -895,21 +895,28 @@ img {
     object-fit: contain !important;
     display: block;
     margin: 0 auto;
-    filter: grayscale(1) contrast(1.2);
     transition: var(--transition-smooth);
 }
 
-.partner-logo-item:hover .partner-logo-img {
-    filter: none;
-}
-
-/* Forza la conversione dei loghi trasparenti bianchi in nero */
+/* Default per mobile/touch (già colorati e visibili) */
 .partner-logo-img.dark-invert {
-    filter: brightness(0) opacity(0.5) !important;
+    filter: brightness(0) opacity(0.9) !important;
 }
 
-.partner-logo-item:hover .partner-logo-img.dark-invert {
-    filter: brightness(0) opacity(0.9) !important;
+/* Effetti hover applicati solo su desktop / dispositivi con mouse */
+@media (hover: hover) {
+    .partner-logo-img {
+        filter: grayscale(1) contrast(1.2);
+    }
+    .partner-logo-item:hover .partner-logo-img {
+        filter: none;
+    }
+    .partner-logo-img.dark-invert {
+        filter: brightness(0) opacity(0.5) !important;
+    }
+    .partner-logo-item:hover .partner-logo-img.dark-invert {
+        filter: brightness(0) opacity(0.9) !important;
+    }
 }
 
 .partner-logo-item span {
