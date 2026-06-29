@@ -303,20 +303,48 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Effetto caricamento sul bottone
             const submitBtn = bookingForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Invio in corso...';
             
-            setTimeout(() => {
-                // Nascondi il form e mostra il messaggio di successo
+            const formData = {
+                "Nome Referente": document.getElementById('fullName').value,
+                "Ruolo": document.getElementById('role').value,
+                "Istituto": document.getElementById('schoolName').value,
+                "Email": document.getElementById('email').value,
+                "Telefono": document.getElementById('phone').value,
+                "Tipo Richiesta": document.getElementById('requestType').value,
+                "Note": document.getElementById('notes').value
+            };
+            
+            fetch('https://formsubmit.co/ajax/antoniocolucciph@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Errore durante l\'invio');
+                }
+            })
+            .then(data => {
                 bookingForm.style.opacity = '0';
                 setTimeout(() => {
                     bookingForm.style.display = 'none';
                     successMessage.style.display = 'flex';
                 }, 300);
-            }, 1200);
+            })
+            .catch(error => {
+                alert('Si è verificato un errore durante l\'invio. Ti invitiamo a riprovare o ad inviare una mail direttamente a info@teatro99posti.com.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
         });
     }
 
