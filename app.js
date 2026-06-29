@@ -424,4 +424,69 @@ document.addEventListener('DOMContentLoaded', () => {
         createDots();
         updateSlider();
     }
+
+    // 8. Lightbox per la Galleria
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+    const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+    const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+    
+    if (lightbox && lightboxImg && slides.length > 0) {
+        const imageElements = Array.from(document.querySelectorAll('.slider-track .slide img'));
+        const imageUrls = imageElements.map(img => img.src);
+        let lightboxIndex = 0;
+        
+        function openLightbox(index) {
+            lightboxIndex = index;
+            lightboxImg.src = imageUrls[lightboxIndex];
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+        
+        function showNextImage() {
+            lightboxIndex = (lightboxIndex + 1) % imageUrls.length;
+            lightboxImg.src = imageUrls[lightboxIndex];
+        }
+        
+        function showPrevImage() {
+            lightboxIndex = (lightboxIndex - 1 + imageUrls.length) % imageUrls.length;
+            lightboxImg.src = imageUrls[lightboxIndex];
+        }
+        
+        imageElements.forEach((img, idx) => {
+            img.addEventListener('click', () => {
+                openLightbox(idx);
+            });
+        });
+        
+        if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+        if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', showPrevImage);
+        if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', showNextImage);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                closeLightbox();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+                showNextImage();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevImage();
+            }
+        });
+    }
 });

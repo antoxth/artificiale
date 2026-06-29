@@ -1548,3 +1548,109 @@ select {
     }
 }
 
+/* Lightbox Modal */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 2020;
+    transition: var(--transition-smooth);
+}
+
+.lightbox-close:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.lightbox-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 2010;
+    padding: 20px;
+    transition: var(--transition-smooth);
+}
+
+.lightbox-control:hover {
+    color: var(--color-primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-control.prev {
+    left: 20px;
+}
+
+.lightbox-control.next {
+    right: 20px;
+}
+
+.slide img {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .lightbox-control {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    .lightbox-control.prev {
+        left: 10px;
+    }
+    .lightbox-control.next {
+        right: 10px;
+    }
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        font-size: 2rem;
+    }
+}
+
