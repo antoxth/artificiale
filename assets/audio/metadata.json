@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "title": "Amor che a nullo amato amar perdona",
+    "file": "assets/audio/amor-che-a-nullo-amato-amar-perdona.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "2",
+    "title": "Come sono intelligente",
+    "file": "assets/audio/come-sono-intelligente.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "3",
+    "title": "Amore mio, bella senz’anima, ",
+    "file": "assets/audio/fuori-testo-amore-mio-bella-senz-anima.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "4",
+    "title": "Ho un cervello poco intelligente",
+    "file": "assets/audio/ho-un-cervello-poco-intelligente.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "5",
+    "title": "Il tuo amore è un fuoco di paglia",
+    "file": "assets/audio/il-tuo-amore-e-un-fuoco-di-paglia.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "6",
+    "title": "Io faccio un bel mestiere",
+    "file": "assets/audio/io-faccio-un-bel-mestiere-ufficiale.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "7",
+    "title": "It's only business, bro",
+    "file": "assets/audio/it-s-only-business-bro-bis.mp3",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "8",
+    "title": "Ma come ragioni, bro', sei fuori di testa",
+    "file": "assets/audio/ma-come-ragioni-bro-sei-fuori-di-test.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "9",
+    "title": "Miliardi di neuroni",
+    "file": "assets/audio/miliardi-di-neuroni.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "10",
+    "title": "Se ti dico \"Cosa hai in testa?\"",
+    "file": "assets/audio/se-ti-dico-cosa-hai-in-testa.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  },
+  {
+    "id": "11",
+    "title": "Ti prego, parlami ancora",
+    "file": "assets/audio/ti-prego-parlami-ancora.wav",
+    "artist": "Intelligenza Artificiale (Clara)"
+  }
+]

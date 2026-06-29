@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificiale sarà lei - Lezione-Spettacolo sulla IA</title>
+    <meta name="description" content="La prima lezione-spettacolo sull'Intelligenza Artificiale per le scuole: rigore scientifico, ironia e interazione di Paolo Capozzo.">
+    <link rel="icon" href="assets/ai-collage-new.jpg" type="image/jpeg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=1.3">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <span class="logo-text-gold">AI</span> Artificiale sarà lei
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#trailer" class="nav-link">Trailer</a>
+                <a href="#galleria" class="nav-link">Galleria</a>
+                <a href="#didattica" class="nav-link">Perché a Scuola</a>
+                <a href="#programma" class="nav-link">Il Percorso</a>
+                <a href="#playlist" class="nav-link">Musica IA</a>
+                <a href="#contatti" class="btn btn-nav">Contatti</a>
+            </nav>
+            <button class="burger-menu" id="burgerMenu" aria-label="Apri menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">ARTIFICIALE <br><span class="text-gold">SARÀ LEI</span></h1>
+                <p class="hero-subtitle">lezione-spettacolo sulla intelligenza artificiale</p>
+                <p class="hero-description">
+                    Un viaggio brillante e interattivo tra arte, scienza e umanità. Nato in collaborazione con l'Università di Salerno per spiegare a studenti, docenti e genitori come funziona davvero l'IA, demistificando gli algoritmi attraverso la forza del teatro e della risata.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contatti" class="btn btn-primary">Iscriviti all'Anteprima Docenti</a>
+                    <a href="#programma" class="btn btn-secondary">Scopri lo Spettacolo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="collage-container">
+                    <img src="assets/clara-hero.jpg" alt="Clara AI" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Bar -->
+
+
+    <!-- Trailer Section -->
+    <section id="trailer" class="trailer-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Guarda il Trailer</h2>
+                <p class="section-subtitle">Un'anteprima dello spettacolo per scoprire come l'intelligenza artificiale diventa teatro.</p>
+            </div>
+            <div class="video-wrapper">
+                <div class="video-container" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/stage_1.jpg');">
+                    <button class="play-btn" id="playBtn" aria-label="Riproduci video">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <div class="video-placeholder-text">Riproduci l'anteprima dello spettacolo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galleria" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Galleria Fotografica</h2>
+                <p class="section-subtitle">Scatti di scena per rivivere l'atmosfera, i volti e le emozioni dello spettacolo.</p>
+            </div>
+            
+            <div class="slider-container">
+                <button class="slider-control prev-btn" id="galleryPrevBtn" aria-label="Precedente">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="slider-track-wrapper">
+                    <div class="slider-track" id="galleryTrack">
+                        <div class="slide"><img src="assets/gallery/foto_8.jpg" alt="Scatto di scena 1"></div>
+                        <div class="slide"><img src="assets/gallery/foto_10.jpg" alt="Scatto di scena 2"></div>
+                        <div class="slide"><img src="assets/gallery/foto_11.jpg" alt="Scatto di scena 3"></div>
+                        <div class="slide"><img src="assets/gallery/foto_14.jpg" alt="Scatto di scena 4"></div>
+                        <div class="slide"><img src="assets/gallery/foto_15.jpg" alt="Scatto di scena 5"></div>
+                        <div class="slide"><img src="assets/gallery/foto_17.jpg" alt="Scatto di scena 6"></div>
+                        <div class="slide"><img src="assets/gallery/foto_35.jpg" alt="Scatto di scena 7"></div>
+                        <div class="slide"><img src="assets/gallery/foto_58.jpg" alt="Scatto di scena 8"></div>
+                        <div class="slide"><img src="assets/gallery/foto_67.jpg" alt="Scatto di scena 9"></div>
+                        <div class="slide"><img src="assets/gallery/foto_69.jpg" alt="Scatto di scena 10"></div>
+                        <div class="slide"><img src="assets/gallery/foto_73.jpg" alt="Scatto di scena 11"></div>
+                        <div class="slide"><img src="assets/gallery/foto_76.jpg" alt="Scatto di scena 12"></div>
+                    </div>
+                </div>
+                <button class="slider-control next-btn" id="galleryNextBtn" aria-label="Successiva">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="slider-dots" id="galleryDots"></div>
+        </div>
+    </section>
+
+    <!-- Didactic Value Section -->
+    <section id="didattica" class="didattica-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Scienza e Scena: Perché portarlo a scuola</h2>
+                <p class="section-subtitle">Come uniamo rigore accademico e divulgazione teatrale per un apprendimento profondo.</p>
+            </div>
+            <div class="didattica-grid">
+                <div class="didattica-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-graduation-cap card-icon"></i>
+                    </div>
+                    <h3 class="card-title">Il Rigore Scientifico</h3>
+                    <p class="card-text">
+                        Sviluppato in collaborazione con il <strong>Dipartimento di Informatica</strong> e il <strong>Dipartimento di Matematica dell'Università di Salerno (UNISA)</strong> nell'ambito del progetto <em>Alpha Mente</em>. Spieghiamo il funzionamento reale dell'IA – dalle reti neurali ai modelli Transformer – con assoluta precisione scientifica ma un linguaggio accessibile a tutti.
+                    </p>
+                </div>
+                <div class="didattica-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-masks-theater card-icon"></i>
+                    </div>
+                    <h3 class="card-title">La Forza del Teatro</h3>
+                    <p class="card-text">
+                        Il palcoscenico abbatte la barriera della diffidenza verso le materie STEM. Usando l'ironia, la narrazione e il paradosso comico ideati da <strong>Paolo Capozzo</strong>, concetti complessi come gli algoritmi linguistici diventano storie indimenticabili. Gli studenti apprendono divertendosi e partecipando attivamente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program / Chapters Section -->
+    <section id="programma" class="programma-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Il Viaggio in 11 Capitoli</h2>
+                <p class="section-subtitle">L'evoluzione dello show articolata in quadri tematici interattivi. Clicca per approfondire.</p>
+            </div>
+            <div class="chapters-accordion">
+                <!-- Cap 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">01</span>
+                        <span class="chapter-name">La Nuova era tecnologica</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Definizione di chatbot e linguaggio naturale. Limiti della comicità meccanica e presenza di filtri etici/censura (safety filters).</p>
+                        <p><strong>Strategia teatrale:</strong> L'attore X recita un monologo scritto interamente dall'IA. Interazione con il pubblico per valutare il livello di comicità di tre battute proposte dal computer.</p>
+                    </div>
+                </div>
+                <!-- Cap 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">02</span>
+                        <span class="chapter-name">IA e i nuovi codici dell'arte</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Diffusione dell'IA nei settori creativi (pubblicità, pittura digitale, poesia e musica sintetica con il caso di Breaking Rust).</p>
+                        <p><strong>Strategia teatrale:</strong> Coinvolgimento del pubblico nella generazione in diretta di poesie (haiku), dipinti in stile Picasso e brani musicali.</p>
+                    </div>
+                </div>
+                <!-- Cap 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">03</span>
+                        <span class="chapter-name">Gente intelligente e macchine parlanti</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Definizione di intelligenza. Storia dei test di misurazione (QI di William Stern, studio di Lewis Terman). Teoria delle 9 Intelligenze Multiple di Howard Gardner. Test di Turing vs Winograd Schema Challenge.</p>
+                        <p><strong>Strategia teatrale:</strong> Divertente parodia scolastica (la valutazione dello studente "Scatuozzo"). Spiegazione dello Schema di Winograd tramite l'esempio del versamento del latte.</p>
+                    </div>
+                </div>
+                <!-- Cap 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">04</span>
+                        <span class="chapter-name">Ma che c'hai in testa??</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Confronto biologico e tecnologico. Struttura del cervello umano (86 miliardi di neuroni) e introduzione alle reti neurali biologiche.</p>
+                        <p><strong>Strategia teatrale:</strong> Gli attori utilizzano l'azione fisica e il lancio di un cervello di plastica per rappresentare la simulazione biologica.</p>
+                    </div>
+                </div>
+                <!-- Cap 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">05</span>
+                        <span class="chapter-name">Un cervello elettronico</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Nascita del neurone artificiale ad opera di McCulloch e Pitts (1943). Concetti di input, pesi sinaptici, sommatoria e funzione soglia (step function).</p>
+                        <p><strong>Strategia teatrale:</strong> Recitazione con accento italo-americano nel ruolo di Pitts che propone l'algoritmo al collega McCulloch davanti a un bicchiere di whisky.</p>
+                    </div>
+                </div>
+                <!-- Cap 6 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">06</span>
+                        <span class="chapter-name">Aziona il cervello</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Funzionamento di una rete neurale multilivello (layers). Differenza tra calcoli lineari e non lineari.</p>
+                        <p><strong>Strategia teatrale:</strong> Gioco di ruolo con il pubblico: la platea si trasforma in una rete neurale umana per risolvere collettivamente un cruciverba in caratteri sconosciuti.</p>
+                    </div>
+                </div>
+                <!-- Cap 7 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">07</span>
+                        <span class="chapter-name">Il mondo diviso in "Classi"</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> L'apprendimento supervisionato nell'IA discriminativa: concetti di Classificazione e di Regressione statistica.</p>
+                        <p><strong>Strategia teatrale:</strong> Spiegazione visiva tramite slide interattive basata su un dataset semplificato di animali (cani, gatti, conigli).</p>
+                    </div>
+                </div>
+                <!-- Cap 8 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">08</span>
+                        <span class="chapter-name">IA e Linguaggio Naturale</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Funzionamento dell'IA Generativa. Rete neurale Autoencoder (collo di bottiglia). Modelli linguistici (NLP) e architettura Transformer (Attention is All You Need, 2017). Parametro di temperatura.</p>
+                        <p><strong>Strategia teatrale:</strong> Spiegazione del meccanismo di generazione delle parole: come la transizione da un sistema deterministico a uno probabilistico simula la creatività umana.</p>
+                    </div>
+                </div>
+                <!-- Cap 9 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">09</span>
+                        <span class="chapter-name">Tu non mi capisci</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Semantica vs Sintassi. Significante e Significato. Semantica distribuzionale: l'ipotesi di Harris e Firth ("conoscerai una parola dalla compagnia che frequenta").</p>
+                        <p><strong>Strategia teatrale:</strong> Esperimento del "tezgüino" (parola sconosciuta compresa esclusivamente attraverso 4 frasi contestuali) per mostrare come l'IA apprende le relazioni linguistiche.</p>
+                    </div>
+                </div>
+                <!-- Cap 10 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">10</span>
+                        <span class="chapter-name">Addestramento, Performance, Etica</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Limiti dell'IA: allucinazioni (l'IA inventa dati pur di completare il testo), bias di addestramento, questioni etiche (decisioni aziendali, fake news, manipolazione sociale).</p>
+                        <p><strong>Strategia teatrale:</strong> Esempio umoristico in cui tre versioni diverse dell'IA Clara (scientifica, complottista, social) rispondono alla descrizione di un tramonto.</p>
+                    </div>
+                </div>
+                <!-- Cap 11 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="chapter-num">11</span>
+                        <span class="chapter-name">Il futuro? Lo conosce Clara!</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>Argomenti scientifici:</strong> Riflessione finale sull'evoluzione futura del rapporto simbiotico tra uomo e macchina.</p>
+                        <p><strong>Strategia teatrale:</strong> Congedo teatrale supportato da un suggestivo video finale con le predizioni dell'IA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactivity Section -->
+    <section class="interattivita-section">
+        <div class="container interattivita-container" style="background-image: linear-gradient(rgba(26, 26, 26, 0.91), rgba(26, 26, 26, 0.91)), url('assets/audience-neural-network.jpg');">
+            <div class="interattivita-content">
+                <span class="tag-gold">DIDATTICA ATTIVA</span>
+                <h2 class="interattivita-title">Il Pubblico Diventa "Rete Neurale"</h2>
+                <p class="interattivita-text">
+                    Uno dei momenti di maggiore impatto dello spettacolo è il gioco di ruolo collettivo. L'intera platea viene suddivisa in nodi e livelli di una rete neurale umana. Senza saperlo, attraverso scambi di impulsi fisici e calcoli collaborativi, gli studenti risolveranno un cruciverba in una lingua sconosciuta. 
+                </p>
+                <p class="interattivita-text">
+                    Questo esperimento pratico permette di far comprendere visivamente e fisicamente la differenza cruciale tra <strong>sintassi</strong> (l'elaborazione statistica dei dati svolta dalle macchine) e <strong>semantica</strong> (la reale comprensione umana dei concetti).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist / AI Songs Section -->
+    <section id="playlist" class="playlist-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">La Playlist dell'IA</h2>
+                <p class="section-subtitle">Ascolta ed effettua il download dei brani musicali generati interamente da algoritmi di Intelligenza Artificiale discussi nel Capitolo 2.</p>
+            </div>
+            
+            <div class="songs-container">
+                <!-- Brano 1 -->
+                <div class="song-card" data-track="1">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Amor che a nullo amato amar perdona</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 01 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/amor-che-a-nullo-amato-amar-perdona.wav" download="amor-che-a-nullo-amato-amar-perdona.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 2 -->
+                <div class="song-card" data-track="2">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Come sono intelligente</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 02 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/come-sono-intelligente.wav" download="come-sono-intelligente.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 3 -->
+                <div class="song-card" data-track="3">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Amore mio, bella senz’anima, </h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 03 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/fuori-testo-amore-mio-bella-senz-anima.wav" download="fuori-testo-amore-mio-bella-senz-anima.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 4 -->
+                <div class="song-card" data-track="4">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Ho un cervello poco intelligente</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 04 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/ho-un-cervello-poco-intelligente.wav" download="ho-un-cervello-poco-intelligente.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 5 -->
+                <div class="song-card" data-track="5">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Il tuo amore è un fuoco di paglia</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 05 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/il-tuo-amore-e-un-fuoco-di-paglia.wav" download="il-tuo-amore-e-un-fuoco-di-paglia.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 6 -->
+                <div class="song-card" data-track="6">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Io faccio un bel mestiere</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 06 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/io-faccio-un-bel-mestiere-ufficiale.wav" download="io-faccio-un-bel-mestiere-ufficiale.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 7 -->
+                <div class="song-card" data-track="7">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">It's only business, bro</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 07 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/it-s-only-business-bro-bis.mp3" download="it-s-only-business-bro-bis.mp3" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 8 -->
+                <div class="song-card" data-track="8">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Ma come ragioni, bro', sei fuori di testa</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 08 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/ma-come-ragioni-bro-sei-fuori-di-test.wav" download="ma-come-ragioni-bro-sei-fuori-di-test.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 9 -->
+                <div class="song-card" data-track="9">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Miliardi di neuroni</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 09 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/miliardi-di-neuroni.wav" download="miliardi-di-neuroni.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 10 -->
+                <div class="song-card" data-track="10">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Se ti dico "Cosa hai in testa?"</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 10 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/se-ti-dico-cosa-hai-in-testa.wav" download="se-ti-dico-cosa-hai-in-testa.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Brano 11 -->
+                <div class="song-card" data-track="11">
+                    <div class="song-cover">
+                        <i class="fa-solid fa-compact-disc disc-icon"></i>
+                    </div>
+                    <div class="song-info">
+                        <h3 class="song-title">Ti prego, parlami ancora</h3>
+                        <p class="song-artist">Spettacolo "Artificiale sarà lei"</p>
+                        <p class="song-details">Traccia 11 • IA Songwriting Experiment</p>
+                    </div>
+                    <div class="song-controls">
+                        <button class="song-play-btn" aria-label="Riproduci"><i class="fa-solid fa-play"></i></button>
+                        <a href="assets/audio/ti-prego-parlami-ancora.wav" download="ti-prego-parlami-ancora.wav" class="song-download-btn" title="Scarica brano"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Simulatore Player Audio Attivo -->
+            <div class="global-player" id="globalPlayer">
+                <div class="visualizer" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="player-track-info">
+                    <span class="player-track-title" id="playerTitle">Seleziona un brano</span>
+                    <span class="player-track-artist" id="playerArtist">-</span>
+                </div>
+                <div class="player-progress">
+                    <span class="time" id="currentTime">0:00</span>
+                    <div class="progress-bar-container" id="progressBarContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <span class="time" id="duration">2:45</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credibility & Partners -->
+    <section class="partners-section">
+        <div class="container">
+            <h3 class="partners-title">Con il patrocinio scientifico e la collaborazione di:</h3>
+            <div class="partners-logos">
+                <a href="https://www.unisa.it" target="_blank" rel="noopener" class="partner-logo-item" title="Università degli Studi di Salerno">
+                    <div class="partner-logo-wrapper">
+                        <img src="assets/logo_unisa.jpg" alt="Logo UNISA" class="partner-logo-img">
+                    </div>
+                    <span>UNISA</span>
+                </a>
+                <a href="https://www.liceomatematico.it" target="_blank" rel="noopener" class="partner-logo-item" title="Liceo Matematico">
+                    <div class="partner-logo-wrapper">
+                        <img src="assets/logo_liceomatematico.jpg" alt="Logo Liceo Matematico" class="partner-logo-img">
+                    </div>
+                    <span>Liceo Matematico</span>
+                </a>
+                <a href="https://www.teatro99posti.com" target="_blank" rel="noopener" class="partner-logo-item" title="Teatro 99 Posti">
+                    <div class="partner-logo-wrapper">
+                        <img src="assets/logo_teatro99posti.png" alt="Logo Teatro 99 Posti" class="partner-logo-img dark-invert">
+                    </div>
+                    <span>Teatro 99 Posti</span>
+                </a>
+                <a href="https://www.teatro99posti.com" target="_blank" rel="noopener" class="partner-logo-item" title="CoCIS">
+                    <div class="partner-logo-wrapper">
+                        <img src="assets/logo_cocis.png" alt="Logo CoCIS" class="partner-logo-img dark-invert">
+                    </div>
+                    <span>CoCIS</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <div class="resources-card">
+                <div class="resources-content">
+                    <h2 class="resources-card-title">Kit Didattico per i Docenti</h2>
+                    <p class="resources-card-text">
+                        Scarica la brochure PTOF completa con tutti i dettagli pedagogici dello spettacolo, i collegamenti multidisciplinari (STEM, scienze umane, filosofia, lingua) e le proposte di attività da svolgere in classe prima e dopo la visione.
+                    </p>
+                    <a href="riassunto.md" class="btn btn-primary" download="Kit_Didattico_Artificiale_Sara_Lei.md">
+                        <i class="fa-solid fa-file-pdf"></i> Scarica il Kit Didattico (Markdown)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact and Booking Section (Replacing FAQ) -->
+    <section id="contatti" class="contatti-section">
+        <div class="container contatti-container">
+            <div class="contatti-info">
+                <h2 class="contatti-title">Porta lo Spettacolo <br>nella tua Scuola</h2>
+                <p class="contatti-desc">
+                    Compila il modulo per ricevere maggiori informazioni, proporre una data per il tuo istituto o iscriverti all'<strong>Anteprima Gratuita per Docenti e Dirigenti Scolastici</strong> che si terrà a inizio settembre.
+                </p>
+                <div class="contatti-benefits">
+                    <div class="benefit-item">
+                        <i class="fa-solid fa-check benefit-icon"></i>
+                        <span>Ingresso e partecipazione gratuiti per i docenti accompagnatori</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fa-solid fa-check benefit-icon"></i>
+                        <span>Allestimento flessibile adattabile ad aule magne, palestre o teatri</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fa-solid fa-check benefit-icon"></i>
+                        <span>Kit didattico e schede di attività post-spettacolo incluse</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contatti-form-wrapper">
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="fullName">Nome e Cognome Referente *</label>
+                        <input type="text" id="fullName" required placeholder="es. Prof. Mario Rossi">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="role">Ruolo nella Scuola *</label>
+                            <select id="role" required>
+                                <option value="" disabled selected>Seleziona ruolo</option>
+                                <option value="dirigente">Dirigente Scolastico</option>
+                                <option value="docente_stem">Docente area STEM (Matematica/Fisica/Info)</option>
+                                <option value="docente_umanistico">Docente area Umanistica (Lettere/Filosofia)</option>
+                                <option value="altro">Altro docente / Staff</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="schoolName">Nome Istituto *</label>
+                            <input type="text" id="schoolName" required placeholder="es. Liceo Mancini Avellino">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required placeholder="es. mario.rossi@scuola.istruzione.it">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefono *</label>
+                            <input type="tel" id="phone" required placeholder="es. 347 1234567">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestType">Tipo di Richiesta *</label>
+                        <select id="requestType" required>
+                            <option value="" disabled selected>Seleziona opzione</option>
+                            <option value="anteprima">Voglio partecipare all'Anteprima Docenti (Inizio Settembre)</option>
+                            <option value="scuola">Desidero portare lo spettacolo nella mia scuola</option>
+                            <option value="info">Richiesta generica di informazioni</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Note logistiche / Domande</label>
+                        <textarea id="notes" rows="4" placeholder="Indica il numero stimato di studenti, date preferite o particolari necessità logistiche..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Invia Richiesta di Contatto</button>
+                </form>
+                
+                <!-- Messaggio di Successo -->
+                <div class="success-message" id="successMessage">
+                    <i class="fa-solid fa-circle-check success-icon"></i>
+                    <h3>Richiesta inviata con successo!</h3>
+                    <p>Ti contatteremo al più presto per confermare la tua richiesta o per fornirti tutti i dettagli relativi all'Anteprima Docenti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-info">
+                <p class="footer-title">Teatro 99 Posti</p>
+                <p class="footer-address">Via Traversa 91, Torelli di Mercogliano (AV) – 83013</p>
+                <p class="footer-contacts">Tel: 389 885 6273 | Email: info@teatro99posti.com</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/teatro99posti" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/teatro99posti/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCrwx--9Q02-Y-J7PEzThb5w/videos" target="_blank" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2026 – Tutti i diritti riservati. Sviluppato per lo spettacolo "Artificiale sarà lei".</p>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="iframe-container">
+                <!-- Video di placeholder pulito -->
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen id="modalIframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
