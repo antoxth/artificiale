@@ -1379,19 +1379,19 @@ select {
     .nav-menu {
         position: fixed;
         top: 72px;
-        left: -100%;
+        right: -100%;
         width: 100%;
         height: calc(100vh - 72px);
         background-color: white;
         flex-direction: column;
         padding: 40px 24px;
         gap: 24px;
-        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border-top: 1px solid var(--color-border);
     }
     
     .nav-menu.active {
-        left: 0;
+        right: 0;
     }
     
     .btn-nav {
