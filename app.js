@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Chiudi il menu quando si clicca su un link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        // Chiudi il menu quando si clicca su un link o bottone
+        const menuLinks = document.querySelectorAll('.nav-menu a');
+        menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 const icon = burgerMenu.querySelector('i');
