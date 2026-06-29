@@ -1542,6 +1542,13 @@ select {
 }
 
 @media (max-width: 600px) {
+    .container {
+        padding: 0 16px;
+    }
+    .contatti-form-wrapper {
+        padding: 24px 16px;
+        border-radius: 12px;
+    }
     .slide {
         flex: 0 0 100%;
     }
