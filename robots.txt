@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /prenotazione
+Disallow: /api/
+
+Sitemap: https://teatrodellescienze.it/sitemap.xml
