@@ -1,0 +1,11 @@
+{
+  "name": "artificiale-sara-lei",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sito e sistema di prenotazione per la lezione-spettacolo 'Artificiale sarà lei'.",
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "resend": "^4.0.0"
+  }
+}

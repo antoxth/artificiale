@@ -1,5 +1,11 @@
 {
   "version": 2,
   "name": "artificiale-sara-lei",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "crons": [
+    {
+      "path": "/api/cron/reminders",
+      "schedule": "0 9 * * *"
+    }
+  ]
 }

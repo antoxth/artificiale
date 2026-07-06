@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prenota — Anteprima Docenti | Artificiale sarà lei</title>
+  <meta name="description" content="Prenota il tuo posto per l'anteprima docenti della lezione-spettacolo Artificiale sarà lei al Teatro 99 Posti." />
+  <link rel="icon" href="assets/ai-collage-new.jpg" type="image/jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/prenota.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">Artificiale <span>sarà lei</span></span>
+    <a href="/"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
+  </header>
+
+  <main class="wrap">
+    <!-- Info evento -->
+    <section class="event-card">
+      <span class="badge-free"><i class="fa-solid fa-ticket"></i> Ingresso gratuito</span>
+      <h1 id="evTitle">Anteprima Docenti</h1>
+      <p class="sub" id="evSub"></p>
+      <div class="event-meta">
+        <div><i class="fa-solid fa-calendar-day"></i> <span id="evDate">—</span></div>
+        <div><i class="fa-solid fa-location-dot"></i> <span id="evVenue">—</span></div>
+      </div>
+    </section>
+
+    <!-- Mappa -->
+    <section id="mapSection">
+      <h2 class="section-title">Scegli il tuo posto</h2>
+      <p class="section-hint">Clicca uno o più posti liberi sulla mappa. Puoi selezionarne quanti vuoi.</p>
+
+      <div class="legend">
+        <span><i class="swatch free"></i> Libero</span>
+        <span><i class="swatch selected"></i> Selezionato</span>
+        <span><i class="swatch occupied"></i> Occupato</span>
+      </div>
+
+      <div class="remaining-pill">Posti disponibili: <b id="remaining">—</b> / <span id="capacity">99</span></div>
+
+      <div class="hall" id="hall">
+        <div class="hall-label">Porta</div>
+        <div class="blocks">
+          <div class="block" id="blockLeft"></div>
+          <div class="block" id="blockRight"></div>
+        </div>
+        <div class="hall-label stage">Palcoscenico</div>
+        <p class="section-hint" style="text-align:center;margin:16px 0 0">
+          Sala "a gradinate": i posti vicini al palco sono i più bassi.
+        </p>
+      </div>
+
+      <div class="summary-bar">
+        <div class="chosen">
+          <div>Hai selezionato <b id="selCount">0</b> posti</div>
+          <div class="seat-chips" id="selChips"></div>
+        </div>
+        <button class="btn btn-primary" id="toFormBtn" disabled>Continua</button>
+      </div>
+    </section>
+
+    <!-- Form dati -->
+    <section class="form-card hidden" id="formSection">
+      <h2 class="section-title">I tuoi dati</h2>
+      <p class="section-hint">Posti selezionati: <span class="seat-chips" id="formChips" style="display:inline-flex"></span></p>
+
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="name">Nome e cognome *</label>
+            <input type="text" id="name" required placeholder="es. Prof.ssa Maria Rossi" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" required placeholder="nome@scuola.it" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefono</label>
+            <input type="tel" id="phone" placeholder="es. 347 1234567" />
+          </div>
+          <div class="form-group">
+            <label for="school">Scuola / Istituto</label>
+            <input type="text" id="school" placeholder="es. Liceo Mancini — Avellino" />
+          </div>
+          <div class="form-group">
+            <label for="role">Ruolo</label>
+            <select id="role">
+              <option value="">Seleziona…</option>
+              <option>Dirigente scolastico</option>
+              <option>Docente area STEM</option>
+              <option>Docente area umanistica</option>
+              <option>Altro docente / staff</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="notes">Note</label>
+            <textarea id="notes" rows="3" placeholder="Eventuali richieste o accompagnatori…"></textarea>
+          </div>
+          <div class="form-group full">
+            <label class="consent">
+              <input type="checkbox" id="consent" required />
+              <span>Acconsento al trattamento dei miei dati personali per la gestione della prenotazione, ai sensi del Reg. UE 2016/679 (GDPR). I dati saranno usati solo per organizzare l'evento.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-error" id="formError"></div>
+
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <button type="button" class="btn btn-ghost" id="backToMapBtn"><i class="fa-solid fa-arrow-left"></i> Cambia posti</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" style="flex:1;min-width:200px">Conferma prenotazione</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Successo -->
+    <section class="success" id="successSection">
+      <i class="fa-solid fa-circle-check"></i>
+      <h2>Prenotazione confermata!</h2>
+      <p>Conserva il tuo codice — ti sarà chiesto all'ingresso:</p>
+      <div class="code" id="successCode">—</div>
+      <p>Posti: <span class="seat-chips" id="successChips" style="display:inline-flex"></span></p>
+      <p id="emailNote" style="color:var(--muted);font-size:14px;margin-top:14px"></p>
+      <p style="margin-top:20px"><a href="/">Torna al sito</a></p>
+    </section>
+  </main>
+
+  <script src="assets/prenota.js"></script>
+</body>
+</html>

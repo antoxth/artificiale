@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Admin Prenotazioni — Artificiale sarà lei</title>
+  <link rel="icon" href="assets/ai-collage-new.jpg" type="image/jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/prenota.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">Admin <span>· Prenotazioni</span></span>
+    <a href="#" id="logoutBtn" class="hidden"><i class="fa-solid fa-right-from-bracket"></i> Esci</a>
+  </header>
+
+  <!-- Login -->
+  <div class="login-box" id="loginBox">
+    <h2>Accesso riservato</h2>
+    <p style="color:var(--muted);font-size:14px">Inserisci la password admin.</p>
+    <input type="password" id="pw" placeholder="Password" />
+    <button class="btn btn-primary btn-block" id="loginBtn">Entra</button>
+    <p class="form-error" id="loginError" style="margin-top:14px">Password errata.</p>
+  </div>
+
+  <!-- Dashboard -->
+  <main class="wrap hidden" id="dashboard">
+    <h1 id="evTitle" style="margin-bottom:4px">Prenotazioni</h1>
+    <p class="section-hint" id="evDate">—</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n" id="stBooked">0</div><div class="l">Posti prenotati</div></div>
+      <div class="stat"><div class="n" id="stFree">0</div><div class="l">Posti liberi</div></div>
+      <div class="stat"><div class="n" id="stBookings">0</div><div class="l">Prenotazioni</div></div>
+      <div class="stat"><div class="n" id="stCheckin">0</div><div class="l">Check-in</div></div>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" id="exportBtn"><i class="fa-solid fa-file-csv"></i> Esporta CSV</button>
+      <button class="btn btn-ghost" id="refreshBtn"><i class="fa-solid fa-rotate"></i> Aggiorna</button>
+    </div>
+
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Posti</th><th>Nome</th><th>Scuola</th><th>Contatti</th><th>Codice</th><th>Presenza</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="6" style="text-align:center;color:var(--muted)">Caricamento…</td></tr>
+      </tbody>
+    </table>
+    <p class="section-hint" style="margin-top:14px">
+      Clicca un posto nella colonna "Presenza" per registrare/annullare il check-in all'ingresso.
+    </p>
+  </main>
+
+  <script src="assets/admin.js"></script>
+</body>
+</html>

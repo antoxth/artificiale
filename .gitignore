@@ -1,7 +1,16 @@
 .DS_Store
+
+# Dipendenze e build
+node_modules/
+.vercel/
+
+# Segreti / variabili d'ambiente (non committare mai)
+.env
+.env*.local
+
 Artificiale-sara-lei_locandina.jpeg.webp
 IMG_1504.jpg
-audio e canzoni /
+audio-e-canzoni/
 contatti_scuole_avellino.xlsx
 copione IA per 2 attori.docx.pdf
 foto/

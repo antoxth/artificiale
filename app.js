@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (current && link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
@@ -81,14 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoModal = document.getElementById('videoModal');
     const closeModal = document.getElementById('closeModal');
     const modalIframe = document.getElementById('modalIframe');
-    const originalSrc = modalIframe ? modalIframe.src : '';
+    // L'URL del video sta in data-video: così l'iframe NON carica e NON parte
+    // al caricamento della pagina. Viene impostato solo al click dell'utente.
+    const videoUrl = modalIframe ? (modalIframe.dataset.video || '') : '';
 
     if (playBtn && videoModal && closeModal) {
         playBtn.addEventListener('click', () => {
             videoModal.classList.add('active');
-            if (modalIframe) {
-                // Avvia il video in autoplay
-                modalIframe.src = originalSrc;
+            if (modalIframe && videoUrl) {
+                // Avvia il video solo ora, su azione dell'utente
+                modalIframe.src = videoUrl + '?autoplay=1';
             }
         });
 

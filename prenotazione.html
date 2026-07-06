@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>La tua prenotazione — Artificiale sarà lei</title>
+  <link rel="icon" href="assets/ai-collage-new.jpg" type="image/jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/prenota.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">Artificiale <span>sarà lei</span></span>
+    <a href="/"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
+  </header>
+
+  <main class="wrap" style="max-width:560px">
+    <div class="event-card" id="card">
+      <p style="text-align:center;color:var(--muted)">Caricamento…</p>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const card = $('card');
+      const params = new URLSearchParams(location.search);
+      const code = (params.get('code') || '').trim();
+
+      function chip(seats) {
+        return '<span class="seat-chips" style="display:inline-flex">' +
+          seats.sort((a, b) => a - b).map((s) => `<span>${s}</span>`).join('') + '</span>';
+      }
+
+      async function load() {
+        if (!code) {
+          card.innerHTML = '<p>Codice prenotazione mancante.</p>';
+          return;
+        }
+        try {
+          const res = await fetch('/api/reservation?code=' + encodeURIComponent(code));
+          if (!res.ok) {
+            card.innerHTML = '<h1>Prenotazione non trovata</h1><p class="sub">Controlla il codice e riprova.</p>';
+            return;
+          }
+          const d = await res.json();
+          if (d.status === 'cancelled') {
+            card.innerHTML = `<h1>Prenotazione annullata</h1><p class="sub">Il codice <b>${d.code}</b> è stato annullato. I posti sono di nuovo disponibili.</p>`;
+            return;
+          }
+          card.innerHTML = `
+            <h1>La tua prenotazione</h1>
+            <p class="sub">Codice <b>${d.code}</b> — intestata a ${d.name}</p>
+            <p style="margin-top:14px">Posti riservati: ${chip(d.seats)}</p>
+            <div style="margin-top:22px">
+              <button class="btn btn-ghost" id="cancelBtn" style="color:#b91c1c;border-color:#fecaca">
+                <i class="fa-solid fa-xmark"></i> Annulla prenotazione
+              </button>
+            </div>
+            <p class="form-error" id="err" style="margin-top:14px"></p>`;
+          $('cancelBtn').addEventListener('click', cancel);
+        } catch {
+          card.innerHTML = '<p>Errore di connessione. Riprova.</p>';
+        }
+      }
+
+      async function cancel() {
+        if (!confirm('Vuoi davvero annullare la prenotazione? I posti torneranno disponibili.')) return;
+        const btn = $('cancelBtn');
+        btn.disabled = true;
+        btn.textContent = 'Annullamento…';
+        try {
+          const res = await fetch('/api/cancel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code }),
+          });
+          if (res.ok) {
+            card.innerHTML = '<h1>Prenotazione annullata</h1><p class="sub">Grazie per averci avvisato. I posti sono di nuovo disponibili.</p>';
+          } else {
+            $('err').textContent = 'Impossibile annullare. Riprova.';
+            $('err').style.display = 'block';
+            btn.disabled = false;
+          }
+        } catch {
+          $('err').textContent = 'Errore di connessione.';
+          $('err').style.display = 'block';
+          btn.disabled = false;
+        }
+      }
+
+      load();
+    })();
+  </script>
+</body>
+</html>
