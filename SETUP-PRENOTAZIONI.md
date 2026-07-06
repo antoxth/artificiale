@@ -12,7 +12,7 @@ Sistema di prenotazione posti per l'**Anteprima Docenti** di *Artificiale sarà 
 
 ## Architettura
 - Sito statico + **Vercel Serverless Functions** in `api/`.
-- **Postgres** (Vercel/Neon) per le prenotazioni — vedi `lib/db.js`.
+- **Postgres su Supabase** per le prenotazioni (driver `postgres.js`) — vedi `lib/db.js`.
 - **Resend** per le email — vedi `lib/email.js`.
 - **Vercel Cron** → `api/cron/reminders.js` (schedulato in `vercel.json`).
 - Piantina della sala: **`lib/seatmap.js`** (fonte unica di verità).
@@ -22,9 +22,11 @@ Sistema di prenotazione posti per l'**Anteprima Docenti** di *Artificiale sarà 
 
 ## Passi per andare online
 
-### 1. Database (gratis)
-Su Vercel → progetto → **Storage** → crea un **Postgres** (Neon) e collegalo al progetto.
-Le variabili `POSTGRES_URL…` vengono impostate da sole. La tabella si crea da sola al primo utilizzo.
+### 1. Database (gratis) — Supabase
+Progetto Supabase: **artificiale-sara-lei** (ref `zuymlldglrafcbytjzyl`, EU Central). La tabella `reservations` è già creata.
+Prendi la stringa di connessione: Supabase → progetto → **Connect** → **Transaction pooler** (porta 6543),
+sostituisci `[YOUR-PASSWORD]` con la password del database (Settings → Database → *Reset database password* se non la conosci),
+e impostala su Vercel come **`DATABASE_URL`**.
 
 ### 2. Email (gratis) — Resend
 1. Crea un account su [resend.com](https://resend.com) e genera una **API key**.
@@ -66,5 +68,5 @@ Apri **`preview-mappa.html`** con doppio clic: mostra il layout dei 99 posti sen
 Utile per confermare che la disposizione coincida con la sala reale.
 
 ## Riepilogo variabili d'ambiente
-Vedi `.env.example`. In sintesi: `POSTGRES_URL*` (auto), `RESEND_API_KEY`, `MAIL_FROM`,
+Vedi `.env.example`. In sintesi: `DATABASE_URL` (Supabase), `RESEND_API_KEY`, `MAIL_FROM`,
 `SITE_URL`, `ADMIN_PASSWORD`, `CRON_SECRET`.

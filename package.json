@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Sito e sistema di prenotazione per la lezione-spettacolo 'Artificiale sarà lei'.",
   "dependencies": {
-    "@vercel/postgres": "^0.10.0",
+    "postgres": "^3.4.5",
     "resend": "^4.0.0"
   }
 }
