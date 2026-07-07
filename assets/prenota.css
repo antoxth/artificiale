@@ -189,9 +189,21 @@ table.data tr:last-child td { border-bottom: none; }
 
 .toolbar { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
 
+/* Sotto i 720px: la mappa scala in modo fluido per stare SEMPRE tutta nello
+   schermo (niente scroll orizzontale), da tablet fino ai telefoni piccoli. */
 @media (max-width: 720px) {
   .form-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  :root { --seat-size: 34px; --seat-gap: 6px; }
-  .blocks { gap: 24px; }
+  .wrap { padding: 18px 12px 90px; }
+  :root {
+    --seat-size: min(30px, calc((100vw - 72px) / 18));
+    --seat-gap: 3px;
+  }
+  .blocks { gap: 10px; }
+  .hall { padding: 10px; overflow-x: visible; }
+  .seat { font-size: calc(var(--seat-size) * 0.44); border-radius: 4px; }
+  .hall-label { font-size: 15px; padding: 8px; margin-top: 14px; }
+  .event-card { padding: 18px; }
+  .event-card h1 { font-size: 22px; }
+  .section-title { font-size: 18px; }
 }
