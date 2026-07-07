@@ -311,16 +311,16 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Invio in corso...';
             
             const formData = {
-                "Nome Referente": document.getElementById('fullName').value,
-                "Ruolo": document.getElementById('role').value,
-                "Istituto": document.getElementById('schoolName').value,
-                "Email": document.getElementById('email').value,
-                "Telefono": document.getElementById('phone').value,
-                "Tipo Richiesta": document.getElementById('requestType').value,
-                "Note": document.getElementById('notes').value
+                name: document.getElementById('fullName').value,
+                role: document.getElementById('role').value,
+                school: document.getElementById('schoolName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                requestType: document.getElementById('requestType').value,
+                notes: document.getElementById('notes').value
             };
-            
-            fetch('https://formsubmit.co/ajax/antoniocolucciph@gmail.com', {
+
+            fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
