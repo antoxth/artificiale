@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             })
             .catch(error => {
-                alert('Si è verificato un errore durante l\'invio. Ti invitiamo a riprovare o ad inviare una mail direttamente a info@teatro99posti.com.');
+                alert('Si è verificato un errore durante l\'invio. Ti invitiamo a riprovare o ad inviare una mail direttamente a info@teatrodellescienze.it.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             });
