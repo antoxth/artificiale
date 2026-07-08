@@ -136,24 +136,53 @@ img {
     color: var(--color-text-muted);
 }
 
-.didattica-intro {
-    max-width: 720px;
-    margin: 8px auto 0 auto;
-    text-align: left;
+/* "Perché a scuola": layout a due colonne (immagine + testo) */
+.perche-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1120px;
+    margin: 0 auto;
 }
 
-.didattica-intro p {
-    font-size: 1.1rem;
-    line-height: 1.75;
+.perche-image {
+    position: relative;
+}
+
+.perche-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    box-shadow: var(--shadow-medium);
+}
+
+.perche-image::after {
+    content: '';
+    position: absolute;
+    left: -14px;
+    bottom: -14px;
+    width: 56%;
+    height: 56%;
+    border-left: 4px solid var(--color-primary);
+    border-bottom: 4px solid var(--color-primary);
+    border-radius: 0 0 0 18px;
+    z-index: -1;
+}
+
+.perche-text p {
+    font-size: 1.12rem;
+    line-height: 1.8;
     color: var(--color-text-muted);
 }
 
-.didattica-intro p + p {
-    margin-top: 1.15em;
+.perche-text p + p {
+    margin-top: 1.3em;
 }
 
-.didattica-intro strong {
-    color: var(--color-text-dark);
+.perche-text strong {
+    color: var(--color-primary-dark);
     font-weight: 700;
 }
 
@@ -455,6 +484,11 @@ img {
 .didattica-section {
     padding: 96px 0;
     background-color: var(--color-bg-alt);
+}
+
+/* "Perché a scuola" su sfondo bianco; "Chi siamo" resta grigio -> sezioni distinte */
+#didattica.didattica-section {
+    background-color: var(--color-bg-light);
 }
 
 .didattica-grid {
@@ -1293,15 +1327,16 @@ select {
 
 .footer-container {
     display: flex;
-    justify-content: space-between;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-bottom: 48px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 40px;
 }
 
 .footer-info {
-    max-width: 400px;
+    max-width: 100%;
 }
 
 .footer-title {
@@ -1408,27 +1443,40 @@ select {
     .burger-menu {
         display: block;
     }
-    
+
+    .perche-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 560px;
+    }
+
+    .perche-image::after {
+        display: none;
+    }
+
     .nav-menu {
         position: fixed;
         top: 72px;
         right: -100%;
         width: 100%;
+        max-width: 100%;
         height: calc(100vh - 72px);
         background-color: white;
         flex-direction: column;
+        align-items: center;
         padding: 40px 24px;
         gap: 24px;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border-top: 1px solid var(--color-border);
     }
-    
+
     .nav-menu.active {
         right: 0;
     }
-    
+
     .btn-nav {
-        width: 100%;
+        width: auto;
+        min-width: 160px;
     }
     
     .hero-title {
