@@ -136,6 +136,27 @@ img {
     color: var(--color-text-muted);
 }
 
+.didattica-intro {
+    max-width: 720px;
+    margin: 8px auto 0 auto;
+    text-align: left;
+}
+
+.didattica-intro p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+}
+
+.didattica-intro p + p {
+    margin-top: 1.15em;
+}
+
+.didattica-intro strong {
+    color: var(--color-text-dark);
+    font-weight: 700;
+}
+
 /* Navbar */
 .navbar {
     position: fixed;
