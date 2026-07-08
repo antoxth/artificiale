@@ -309,7 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 school: document.getElementById('schoolName').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                requestType: document.getElementById('requestType').value,
                 notes: document.getElementById('notes').value
             };
 
