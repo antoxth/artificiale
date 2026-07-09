@@ -391,13 +391,38 @@ img {
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 .hero-description {
     font-size: 1.05rem;
     color: var(--color-text-dark);
     margin-bottom: 40px;
+}
+
+.hero-credits {
+    margin-bottom: 60px;
+}
+
+.hero-credits p {
+    font-size: 1.05rem;
+    color: var(--color-text-dark);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.hero-credits p:last-child {
+    margin-bottom: 0;
+}
+
+.credit-role {
+    display: inline-block;
+    color: var(--color-text-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.6px;
+    margin-right: 8px;
 }
 
 .hero-actions {
@@ -1166,7 +1191,22 @@ img {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--color-text-muted);
+    margin-bottom: 20px;
+}
+
+.contatti-highlight {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-text-dark);
+    padding-left: 18px;
+    border-left: 4px solid var(--color-primary);
     margin-bottom: 28px;
+}
+
+.contatti-highlight strong {
+    color: var(--color-primary-dark);
+    font-weight: 700;
 }
 
 .contatti-benefits {

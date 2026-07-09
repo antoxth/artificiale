@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=1.3">
+    <link rel="stylesheet" href="style.css?v=1.5">
 
     <!-- Dati strutturati: evento teatrale (per i risultati arricchiti di Google) -->
     <script type="application/ld+json">
@@ -95,7 +95,7 @@
                 <a href="#galleria" class="nav-link">Galleria</a>
                 <a href="#playlist" class="nav-link">Musiche</a>
                 <a href="#chi-siamo" class="nav-link">Chi siamo</a>
-                <a href="/prenota" class="btn btn-nav">Prenota</a>
+                <a href="/prenota" target="_blank" rel="noopener" class="btn btn-nav">Prenota</a>
             </nav>
             <button class="burger-menu" id="burgerMenu" aria-label="Apri menu">
                 <i class="fa-solid fa-bars"></i>
@@ -109,12 +109,14 @@
             <div class="hero-content">
                 <h1 class="hero-title">ARTIFICIALE <br><span class="text-gold">SARÀ LEI</span></h1>
                 <p class="hero-subtitle">lezione-spettacolo sulla intelligenza artificiale</p>
-                <p class="hero-description">
-                    Artificiale sarà lei è una vera e propria lezione che illustra ai ragazzi (e ai loro genitori), con rigore scientifico e continue interazioni, come funziona una IA e quali sono i processi che rendono una chatbot capace di dialogare in modo fluido e credibile.<br><br>
-                    Ma è anche uno spettacolo. Perché il teatro è il canale di comunicazione più potente che conosciamo. Sarà un viaggio divertente e paradossale, condotto con un linguaggio pop e con l'aiuto di proiezioni e giochi di ruolo.
-                </p>
+                <div class="hero-credits">
+                    <p><span class="credit-role">di</span> Paolo Capozzo</p>
+                    <p><span class="credit-role">con</span> Antonio Colucci e Paolo Capozzo</p>
+                    <p><span class="credit-role">Consulenza scientifica</span> prof.ssa Monica Sebillo — Dip. Informatica UNISA</p>
+                    <p><span class="credit-role">Resp. progetto</span> prof. Francesco Saverio Tortoriello — Dip. Matematica UNISA</p>
+                </div>
                 <div class="hero-actions">
-                    <a href="/prenota" class="btn btn-primary">Prenota l'Anteprima Docenti</a>
+                    <a href="/prenota" target="_blank" rel="noopener" class="btn btn-primary">Prenota l'Anteprima Docenti</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -129,18 +131,18 @@
     <section id="che-cose" class="checose-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Che cos'è</h2>
+                <h2 class="section-title">Cos'è</h2>
             </div>
             <div class="checose-grid">
                 <div class="checose-col">
                     <div class="checose-icon"><i class="fa-solid fa-microscope"></i></div>
-                    <h3 class="checose-title">Lezione</h3>
-                    <p>Grazie alla consulenza della <strong>Prof.ssa Monica Sebillo</strong> (Dip. Informatica – UNISA), <em>Artificiale sarà lei</em> illustra ai ragazzi e ai genitori, con rigore scientifico e continue interazioni, come funziona una IA e cosa rende una chatbot capace di dialogare in modo credibile.</p>
+                    <h3 class="checose-title">Una Lezione</h3>
+                    <p>che illustra ai ragazzi (e ai loro genitori), con rigore scientifico e competenze accademiche, come funziona una IA e quali sono i processi che rendono una chatbot capace di dialogare in modo fluido e credibile.</p>
                 </div>
                 <div class="checose-col">
                     <div class="checose-icon"><i class="fa-solid fa-masks-theater"></i></div>
-                    <h3 class="checose-title">Spettacolo</h3>
-                    <p>Usa i metodi e le pratiche dell'<strong>arte teatrale</strong> come strumento didattico: un viaggio divertente e paradossale, condotto con un linguaggio pop e arricchito da proiezioni e giochi di ruolo che coinvolgono attivamente tutta la platea, resa protagonista.</p>
+                    <h3 class="checose-title">Uno Spettacolo</h3>
+                    <p>paradossale e divertente che coinvolge continuamente il pubblico, condotto con un linguaggio pop e con l'aiuto di proiezioni e giochi di ruolo. Uno show interattivo che si sviluppa attraverso le interazioni con diverse "piattaforme intelligenti" e che cambia ad ogni replica per adeguarsi all'imprevedibilità delle loro risposte.</p>
                 </div>
             </div>
         </div>
@@ -356,7 +358,7 @@
                     <h3 class="card-title">Progetto Liceo Matematico</h3>
                     <p class="card-text">
                         Il <strong>Liceo Matematico</strong> è un progetto formativo e didattico ideato e promosso dal <strong>Prof. Francesco Saverio Tortoriello</strong>, docente del DipMat dell'Università degli Studi di Salerno. Nasce dalla collaborazione tra scuola superiore e Università ed è coordinato a livello nazionale dall'<strong>Unione Matematica Italiana (UMI)</strong>, che ha l'obiettivo di accrescere le competenze scientifiche attraverso l'interdisciplinarità e la didattica laboratoriale.<br><br>
-                        Nel Liceo Matematico il teatro è tra gli strumenti interdisciplinari più apprezzati nelle ore del Laboratorio. Dall'anno scolastico 2026-2027 è ufficialmente una sperimentazione nazionale quinquennale regolata dal <strong>Ministero dell'Istruzione e del Merito (MIM)</strong>.
+                        Dall'anno scolastico 2026-2027 è ufficialmente una sperimentazione nazionale quinquennale regolata dal <strong>Ministero dell'Istruzione e del Merito (MIM)</strong>.
                     </p>
                 </div>
             </div>
@@ -398,9 +400,10 @@
             <div class="contatti-info">
                 <h2 class="contatti-title">Porta lo Spettacolo <br>nella tua Scuola</h2>
                 <p class="contatti-desc">
-                    Compila il modulo per ricevere maggiori informazioni o proporre una data per il tuo istituto. Oppure prenota subito il tuo posto all'<strong>Anteprima Docenti</strong>.
+                    Compila il modulo per ricevere maggiori informazioni o proporre una data per il tuo istituto.
                 </p>
-                <a href="/prenota" class="btn btn-primary contatti-cta">Prenota l'Anteprima Docenti</a>
+                <p class="contatti-highlight"><strong>Prenota subito il tuo posto all'Anteprima Docenti</strong></p>
+                <a href="/prenota" target="_blank" rel="noopener" class="btn btn-primary contatti-cta">Prenota l'Anteprima Docenti</a>
             </div>
             <div class="contatti-form-wrapper">
                 <form id="bookingForm" class="booking-form">
