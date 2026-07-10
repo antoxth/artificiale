@@ -1251,6 +1251,111 @@ img {
     min-height: 480px;
 }
 
+.form-downloads {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.form-downloads-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-muted);
+    margin-bottom: 14px;
+}
+
+.form-downloads-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1.5px solid var(--color-primary);
+    border-radius: 8px;
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.btn-download:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+/* Colonna destra: bottone materiali (fuori dalla card) + form */
+.contatti-form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Blocco download materiali: banner indipendente, a tutta larghezza,
+   sopra la griglia info + form. */
+.materiali-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    background-color: var(--color-primary-light);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 14px;
+    box-shadow: var(--shadow-subtle);
+}
+.materiali-text {
+    flex: 1;
+    min-width: 240px;
+}
+.materiali-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-primary-dark);
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.materiali-text p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.btn-materiali {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 24px;
+    background-color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.btn-materiali:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: #fff;
+}
+
 .booking-form {
     display: flex;
     flex-direction: column;
@@ -1603,7 +1708,22 @@ select {
     .contatti-form-wrapper {
         padding: 32px 24px;
     }
-    
+
+    .materiali-block {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 18px;
+        padding: 24px 20px;
+        margin-bottom: 32px;
+    }
+    .materiali-title {
+        justify-content: center;
+    }
+    .btn-materiali {
+        justify-content: center;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;

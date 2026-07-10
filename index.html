@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="stylesheet" href="style.css?v=1.8">
 
     <!-- Dati strutturati: evento teatrale (per i risultati arricchiti di Google) -->
     <script type="application/ld+json">
@@ -396,16 +396,27 @@
     <!-- Contatti generali / Richiesta spettacolo per la scuola.
          La prenotazione dei posti per l'anteprima è sulla pagina dedicata /prenota. -->
     <section id="contatti" class="contatti-section">
-        <div class="container contatti-container">
+        <div class="container">
+
+            <!-- Blocco download materiali: indipendente dal form -->
+            <div class="materiali-block">
+                <div class="materiali-text">
+                    <p>Scarica l'opuscolo di riepilogo e la locandina</p>
+                </div>
+                <a href="assets/materiali.zip" download="Artificiale-sara-lei-materiali.zip" class="btn-materiali"><i class="fa-solid fa-download"></i> Scarica opuscolo e locandina</a>
+            </div>
+
+            <div class="contatti-container">
             <div class="contatti-info">
-                <h2 class="contatti-title">Porta lo Spettacolo <br>nella tua Scuola</h2>
+                <h2 class="contatti-title">Porta il tuo Spettacolo <br>a Scuola</h2>
                 <p class="contatti-desc">
                     Compila il modulo per ricevere maggiori informazioni o proporre una data per il tuo istituto.
                 </p>
                 <p class="contatti-highlight"><strong>Prenota subito il tuo posto all'Anteprima Docenti</strong></p>
                 <a href="/prenota" target="_blank" rel="noopener" class="btn btn-primary contatti-cta">Prenota l'Anteprima Docenti</a>
             </div>
-            <div class="contatti-form-wrapper">
+            <div class="contatti-form-col">
+                <div class="contatti-form-wrapper">
                 <form id="bookingForm" class="booking-form">
                     <div class="form-group">
                         <label for="fullName">Nome e Cognome Referente *</label>
@@ -449,6 +460,8 @@
                     <i class="fa-solid fa-circle-check success-icon"></i>
                     <h3>Richiesta inviata con successo!</h3>
                 </div>
+                </div>
+            </div>
             </div>
         </div>
     </section>
