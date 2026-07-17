@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /prenotazione
 Disallow: /api/
 
-Sitemap: https://teatrodellescienze.it/sitemap.xml
+Sitemap: https://www.teatrodellescienze.it/sitemap.xml
