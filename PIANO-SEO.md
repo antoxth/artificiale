@@ -66,18 +66,19 @@
 ### FASE 1 — Ottimizzazione on-page della home (1 settimana)
 > Inserire le parole chiave nei testi esistenti in modo naturale, senza stravolgerli.
 
-- [ ] **Title tag**: da «Artificiale sarà lei — Lezione-spettacolo sull'Intelligenza Artificiale | Teatro 99 Posti»
-      a **«Artificiale sarà lei — Lezione-spettacolo sull'IA | Teatro delle Scienze»** (brand + coerenza).
-- [ ] **Meta description**: riscriverla includendo "teatro didattico" e "Liceo Matematico"
-      (es. *"…un progetto di teatro didattico nato nel Liceo Matematico dell'Università di Salerno…"*).
+- [x] **Title tag** — FATTO 17/7/2026: «Artificiale sarà lei — Lezione-spettacolo sull'IA | Teatro delle Scienze».
+- [x] **Meta description** — FATTO 17/7/2026: include "teatro didattico" e "Liceo Matematico".
 - [ ] **Testi visibili** — inserimenti naturali:
       - Sezione "Cos'è" o hero: definire lo spettacolo come esempio di **teatro didattico**
         e di **didattica spettacolare** (1–2 occorrenze ciascuna, non di più: keyword stuffing = penalità).
       - Scheda "Teatro delle Scienze" (Chi siamo): già parla di "teatro come strumento didattico" →
         aggiungere esplicitamente le due espressioni.
       - Alt di 2–3 immagini chiave: includere "teatro didattico" dove pertinente.
-- [ ] **Dati strutturati**: aggiungere JSON-LD **PerformingGroup/Organization** ("Teatro delle Scienze",
-      con `parentOrganization` UNISA e i social quando ci saranno) accanto al TheaterEvent esistente.
+- [x] **Dati strutturati** — FATTO 17/7/2026: JSON-LD **PerformingGroup** "Teatro delle Scienze"
+      (parentOrganization DipMat UNISA, knowsAbout con le keyword, membri) + corretto l'organizer
+      del TheaterEvent (era "Teatro 99 Posti", ora "Teatro delle Scienze"). Alt hero + 4 foto gallery
+      riscritti con descrizioni reali. In sospeso: inserimenti keyword nei testi visibili (punto 3)
+      e sezione FAQ (punto 6).
 - [ ] **FAQ + schema FAQPage** (opzionale ma consigliata): 4–6 domande reali dei docenti
       ("Per quali scuole è adatto?", "Quanto dura?", "Cos'è la didattica spettacolare?", "Come si prenota?").
       Le FAQ sono un posto perfetto per usare le keyword in modo naturale.
