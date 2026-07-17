@@ -83,6 +83,13 @@
       ("Per quali scuole è adatto?", "Quanto dura?", "Cos'è la didattica spettacolare?", "Come si prenota?").
       Le FAQ sono un posto perfetto per usare le keyword in modo naturale.
 
+### FASE 1-bis — Prestazioni e rifiniture (Core Web Vitals) — FATTO 17/7/2026
+- [x] `width`/`height` su tutte le 18 immagini (elimina i "salti" di layout / CLS).
+- [x] `loading="lazy"` su gallery e loghi partner (16 immagini); `fetchpriority="high"` sulla hero.
+- [x] Favicon vere dal logo chip (16/32px + apple-touch-icon 180px) al posto della foto JPG.
+- [x] 3 canzoni della playlist convertite WAV → MP3 192k (da 24 MB a 3 MB, −87%).
+- [x] Open Graph allineato: og:site_name "Teatro delle Scienze", og:title/og:description coerenti.
+
 ### FASE 2 — Pagine dedicate (2–6 settimane)
 > La mossa che sposta davvero le classifiche: una pagina per ogni tema di ricerca.
 

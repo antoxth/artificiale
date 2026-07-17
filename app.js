@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mappatura dei brani reali presenti in assets/audio/
     const trackList = {
         '7': { title: "It's only business, bro", file: 'assets/audio/it-s-only-business-bro-bis.mp3', artist: 'Intelligenza Artificiale (Clara)' },
-        '8': { title: "Ma come ragioni, bro', sei fuori di testa", file: 'assets/audio/ma-come-ragioni-bro-sei-fuori-di-test.wav', artist: 'Intelligenza Artificiale (Clara)' },
-        '9': { title: 'Miliardi di neuroni', file: 'assets/audio/miliardi-di-neuroni.wav', artist: 'Intelligenza Artificiale (Clara)' },
-        '11': { title: 'Ti prego, parlami ancora', file: 'assets/audio/ti-prego-parlami-ancora.wav', artist: 'Intelligenza Artificiale (Clara)' }
+        '8': { title: "Ma come ragioni, bro', sei fuori di testa", file: 'assets/audio/ma-come-ragioni-bro-sei-fuori-di-test.mp3', artist: 'Intelligenza Artificiale (Clara)' },
+        '9': { title: 'Miliardi di neuroni', file: 'assets/audio/miliardi-di-neuroni.mp3', artist: 'Intelligenza Artificiale (Clara)' },
+        '11': { title: 'Ti prego, parlami ancora', file: 'assets/audio/ti-prego-parlami-ancora.mp3', artist: 'Intelligenza Artificiale (Clara)' }
     };
 
     let audio = new Audio();
