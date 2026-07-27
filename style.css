@@ -630,7 +630,7 @@ img {
 .credit-role {
     display: inline-block;
     color: var(--color-text-dark);
-    font-weight: 700;
+    font-weight: 400;
     text-transform: uppercase;
     font-size: 0.78rem;
     letter-spacing: 0.6px;
