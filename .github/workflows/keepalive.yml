@@ -1,0 +1,52 @@
+# Tiene sveglio il database Supabase.
+#
+# PERCHÉ SERVE: il piano free di Supabase mette in pausa il progetto dopo
+# 7 giorni senza richieste. Con il progetto in pausa tutte le API rispondono
+# 500 e la pagina prenotazioni mostra "Impossibile caricare la mappa dei posti":
+# nessuno può più prenotare, finché qualcuno non se ne accorge.
+#
+# COSA FA: ogni 6 ore chiama /api/seats, che interroga il database.
+# Il contatore dei 7 giorni si azzera a ogni chiamata e non arriva mai a scadere.
+#
+# È volutamente ridondante rispetto al ping del cron di Vercel
+# (vedi api/cron/reminders.js): sono due sistemi indipendenti, se uno si ferma
+# l'altro regge da solo.
+#
+# SE QUESTO WORKFLOW FALLISCE: GitHub manda un'email. Non significa che il ping
+# non ha funzionato, significa che il database è già giù — un progetto Supabase
+# in pausa NON si risveglia da solo con una richiesta. Va riaperto a mano da
+# supabase.com → progetto artificiale-sara-lei → Restore (ci mette qualche minuto).
+
+name: Keep-alive database
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # ogni 6 ore (GitHub usa sempre l'orario UTC)
+  workflow_dispatch: # permette di avviarlo a mano dalla tab "Actions"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chiama /api/seats
+        run: |
+          url="https://www.teatrodellescienze.it/api/seats"
+
+          # Fino a 3 tentativi: un singolo errore di rete non deve far scattare
+          # un falso allarme, ma un database davvero giù deve farlo.
+          for tentativo in 1 2 3; do
+            code=$(curl -sS -m 30 -o /tmp/risposta.json -w '%{http_code}' "$url" || echo "000")
+            echo "Tentativo $tentativo → HTTP $code"
+
+            if [ "$code" = "200" ]; then
+              echo "Database raggiungibile. Risposta (primi 200 caratteri):"
+              head -c 200 /tmp/risposta.json; echo
+              exit 0
+            fi
+
+            [ "$tentativo" -lt 3 ] && sleep 20
+          done
+
+          echo "::error::Database non raggiungibile (ultimo esito: HTTP $code). \
+          Probabile progetto Supabase in pausa: riaprilo da supabase.com → Restore."
+          exit 1
