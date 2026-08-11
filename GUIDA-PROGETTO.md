@@ -65,7 +65,10 @@ artificiale-sara-lei/
 │   ├── cancel.js         ← annulla una prenotazione
 │   ├── contact.js        ← invio del form contatti della home
 │   ├── admin/            ← list.js, checkin.js, export.js (dietro password)
-│   └── cron/reminders.js ← promemoria email (Vercel Cron, ogni giorno alle 9:00)
+│   └── cron/reminders.js ← promemoria email + ping keep-alive del DB (Vercel Cron, ogni giorno alle 9:00)
+│
+├── .github/workflows/
+│   └── keepalive.yml     ← chiama /api/seats ogni 6h per non far addormentare Supabase
 │
 ├── lib/                  ← logica condivisa dalle funzioni
 │   ├── event.js          ← ★ DATI DELL'EVENTO (data, ora, luogo, capienza, email) — punto UNICO
@@ -238,7 +241,7 @@ Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 
 ### ★ Dati dell'evento — `lib/event.js`
 È l'**UNICO** punto dove cambiare data, ora, luogo, capienza, email di contatto dello spettacolo.
-Attualmente: 20 settembre 2026, ore 20:00, Teatro 99 Posti (Torelli di Mercogliano, AV), 99 posti.
+Attualmente: 27 settembre 2026, ore 18:30, Teatro 99 Posti (Torelli di Mercogliano, AV), 99 posti.
 La data serve anche a far partire i promemoria: aggiornala qui e basta.
 
 ### Piantina posti — `lib/seatmap.js`
@@ -248,6 +251,30 @@ Fonte unica di verità della disposizione dei posti. Per verificarla visivamente
 ### Database Supabase
 Progetto **artificiale-sara-lei**, ref `zuymlldglrafcbytjzyl` (EU Central). Tabella `reservations`
 già creata (`db/schema.sql`). Connessione via **Transaction pooler** (porta 6543) → variabile `DATABASE_URL`.
+
+#### ★ Pausa automatica dopo 7 giorni (piano free)
+Supabase mette **in pausa** il progetto dopo 7 giorni senza richieste. Con il progetto in pausa
+tutte le API danno 500 e la pagina prenotazioni mostra *"Impossibile caricare la mappa dei posti"*.
+I dati **non** si perdono: basta riaprirlo (Supabase → progetto → *Restore*), ci mette qualche minuto.
+
+Per evitare che succeda ci sono **due difese indipendenti** (se una si ferma, l'altra regge):
+
+1. **Cron di Vercel** — `api/cron/reminders.js` fa un ping al database (`pingDb()` in `lib/db.js`,
+   una `SELECT 1`) **prima** di qualsiasi uscita anticipata. Attenzione: in origine l'handler usciva
+   subito con `outside_window` senza toccare il DB, ed è esattamente per questo che il progetto
+   andava in pausa. Se un domani si riorganizza quel file, **il ping deve restare la prima cosa
+   che accade dopo il controllo di autenticazione**.
+2. **GitHub Actions** — `.github/workflows/keepalive.yml` chiama `/api/seats` ogni 6 ore.
+   Gratuito e illimitato (il repo è pubblico), e non dipende da Vercel. Se fallisce, GitHub manda
+   un'email: quell'email significa che il DB è **già** giù, non che il ping non ha funzionato.
+   *Nota*: GitHub sospende i workflow schedulati dopo 60 giorni di inattività del repo (avvisa prima
+   via email); basta un commit qualsiasi, o riattivarlo dalla tab *Actions*, per rimetterlo in moto.
+
+Verifiche rapide:
+- stato del DB → `curl -s -o /dev/null -w "%{http_code}" https://www.teatrodellescienze.it/api/seats` (deve dare `200`);
+- cron Vercel → Vercel, progetto, *Cron Jobs* (storico esecuzioni);
+- keep-alive GitHub → tab *Actions* del repo, workflow "Keep-alive database"
+  (si può anche lanciare a mano con *Run workflow*).
 
 ---
 
@@ -296,7 +323,9 @@ Elenco in `.env.example`:
 5. **File sorgente nella root** (brochure/locandine/PDF copione) non sono parte del sito: non linkarli, non committarli.
 6. **Email**: senza `RESEND_API_KEY` il sistema regge (mostra il codice a schermo), ma non manda mail.
 7. **Deploy**: push su `main` = pubblicazione automatica. Non c'è staging separato.
+8. **Supabase va in pausa dopo 7 giorni di inattività** (piano free) e le prenotazioni danno 500.
+   Due keep-alive lo prevengono (cron Vercel + GitHub Actions): non toglierli (§8, "Pausa automatica").
 
 ---
 
-*Ultimo aggiornamento di questa guida: luglio 2026.*
+*Ultimo aggiornamento di questa guida: agosto 2026.*
