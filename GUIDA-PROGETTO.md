@@ -241,7 +241,7 @@ Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 
 ### ★ Dati dell'evento — `lib/event.js`
 È l'**UNICO** punto dove cambiare data, ora, luogo, capienza, email di contatto dello spettacolo.
-Attualmente: 27 settembre 2026, ore 18:30, Teatro 99 Posti (Torelli di Mercogliano, AV), 99 posti.
+Attualmente: domenica 4 ottobre 2026, ore 18:30, Teatro 99 Posti (Torelli di Mercogliano, AV), 99 posti.
 La data serve anche a far partire i promemoria: aggiornala qui e basta.
 
 ### Piantina posti — `lib/seatmap.js`
