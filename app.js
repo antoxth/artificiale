@@ -320,12 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(async response => {
                 if (response.ok) {
                     return response.json();
-                } else {
-                    throw new Error('Errore durante l\'invio');
                 }
+                // Il server spiega cosa non va (es. invalid_email): lo passiamo al catch
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err.error || 'server_error');
             })
             .then(data => {
                 bookingForm.style.opacity = '0';
@@ -335,7 +336,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             })
             .catch(error => {
-                alert('Si è verificato un errore durante l\'invio. Ti invitiamo a riprovare o ad inviare una mail direttamente a info@teatrodellescienze.it.');
+                // Messaggi specifici per i dati non validi; quello generico solo per i guasti veri
+                const messages = {
+                    invalid_email: 'L\'indirizzo email non sembra completo: controlla di averlo scritto per intero (es. nome@scuola.it).',
+                    missing_name: 'Inserisci nome e cognome del referente.'
+                };
+                alert(messages[error.message] || 'Si è verificato un errore durante l\'invio. Ti invitiamo a riprovare o ad inviare una mail direttamente a info@teatrodellescienze.it.');
+                if (error.message === 'invalid_email') document.getElementById('email').focus();
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             });
