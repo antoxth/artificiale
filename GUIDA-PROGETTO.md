@@ -244,6 +244,11 @@ Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 Attualmente: domenica 4 ottobre 2026, ore 18:30, Teatro 99 Posti (Torelli di Mercogliano, AV), 99 posti.
 La data serve anche a far partire i promemoria: aggiornala qui e basta.
 
+**Destinatari del form contatti:** `contactEmail` (Antonio) riceve le richieste ed è l'unico
+indirizzo a cui arrivano le risposte dei docenti; `contactCc` (oggi Paolo, `paolozzo63@gmail.com`)
+le riceve in copia. Le email scritte direttamente a `info@teatrodellescienze.it` NON passano da qui:
+le inoltra **ImprovMX** e i destinatari si cambiano dal loro pannello.
+
 ### Piantina posti — `lib/seatmap.js`
 Fonte unica di verità della disposizione dei posti. Per verificarla visivamente apri
 `preview-mappa.html` con doppio clic (non serve server).
