@@ -2,6 +2,14 @@
   "version": 2,
   "name": "artificiale-sara-lei",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/lib/:path*", "destination": "/", "permanent": false },
+    { "source": "/db/:path*", "destination": "/", "permanent": false },
+    { "source": "/.github/:path*", "destination": "/", "permanent": false },
+    { "source": "/:path(.*\\.md)", "destination": "/", "permanent": false },
+    { "source": "/preview-mappa", "destination": "/", "permanent": false },
+    { "source": "/preview-mappa.html", "destination": "/", "permanent": false }
+  ],
   "crons": [
     {
       "path": "/api/cron/reminders",
