@@ -2,6 +2,7 @@
   "version": 2,
   "name": "artificiale-sara-lei",
   "cleanUrls": true,
+  "regions": ["fra1"],
   "redirects": [
     { "source": "/lib/:path*", "destination": "/", "permanent": false },
     { "source": "/db/:path*", "destination": "/", "permanent": false },

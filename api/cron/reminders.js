@@ -3,7 +3,7 @@
 // quando mancano <= EVENT.reminderHoursBefore ore all'evento.
 
 import { isCron } from '../../lib/auth.js';
-import { getPendingReminders, markReminded, pingDb } from '../../lib/db.js';
+import { getPendingReminders, markReminded, pingDb, checkSchema } from '../../lib/db.js';
 import { sendReminder } from '../../lib/email.js';
 import { EVENT } from '../../lib/event.js';
 
@@ -14,8 +14,15 @@ export default async function handler(req, res) {
   // genera attività ogni giorno e Supabase (free) non mette in pausa il progetto
   // dopo 7 giorni di inattività. Se fallisce, non blocchiamo i promemoria.
   let dbAlive = true;
+  let schema = null;
   try {
     await pingDb();
+    // Controllo quotidiano che tabella e indici siano al loro posto: una sola query,
+    // qui e non nelle richieste degli utenti (che altrimenti rallentano).
+    schema = await checkSchema();
+    if (!schema.tabella || schema.indici < 2) {
+      console.error('ATTENZIONE: schema del database incompleto', schema);
+    }
   } catch (e) {
     dbAlive = false;
     console.error('cron keep-alive: ping DB fallito', e);
@@ -26,7 +33,7 @@ export default async function handler(req, res) {
   const eventTime = new Date(EVENT.dateISO).getTime();
   const hoursToEvent = (eventTime - now) / 36e5;
   if (hoursToEvent < 0 || hoursToEvent > EVENT.reminderHoursBefore) {
-    return res.status(200).json({ ok: true, sent: 0, reason: 'outside_window', hoursToEvent, dbAlive });
+    return res.status(200).json({ ok: true, sent: 0, reason: 'outside_window', hoursToEvent, dbAlive, schema });
   }
 
   try {
