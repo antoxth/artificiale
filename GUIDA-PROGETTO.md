@@ -65,7 +65,7 @@ artificiale-sara-lei/
 │   ├── cancel.js         ← annulla una prenotazione
 │   ├── contact.js        ← invio del form contatti della home
 │   ├── admin/            ← list.js, checkin.js, export.js (dietro password)
-│   └── cron/reminders.js ← promemoria email + ping keep-alive del DB (Vercel Cron, ogni giorno alle 9:00)
+│   └── cron/reminders.js ← promemoria email + ping keep-alive del DB (Vercel Cron, ogni giorno alle 13:00 UTC = 15:00 in Italia)
 │
 ├── .github/workflows/
 │   └── keepalive.yml     ← chiama /api/seats ogni 6h per non far addormentare Supabase
@@ -236,8 +236,8 @@ Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
   L'utente sceglie i posti, compila il form → riceve **email con codice** e link di disdetta.
 - **`/prenotazione?code=…`** → annulla una prenotazione (libera i posti).
 - **`/admin`** → password (`ADMIN_PASSWORD`): conteggi live, elenco, **check-in**, **export CSV**.
-- **Promemoria automatico**: `api/cron/reminders.js`, schedulato in `vercel.json` (ogni giorno alle 9:00);
-  invia solo quando l'evento è dentro la finestra `reminderHoursBefore` (default 48h).
+- **Promemoria automatico**: `api/cron/reminders.js`, schedulato in `vercel.json` (ogni giorno alle 13:00 UTC = 15:00–15:59 in Italia);
+  invia solo quando l'evento è dentro la finestra `reminderHoursBefore` (60h: primo invio il venerdì pomeriggio per uno spettacolo di domenica sera). Il promemoria contiene il pulsante per annullare la prenotazione.
 
 ### ★ Dati dell'evento — `lib/event.js`
 È l'**UNICO** punto dove cambiare data, ora, luogo, capienza, email di contatto dello spettacolo.

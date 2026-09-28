@@ -29,6 +29,12 @@
       const params = new URLSearchParams(location.search);
       const code = (params.get('code') || '').trim();
 
+      // Il nome l'ha scritto chi ha prenotato: va reso innocuo prima di inserirlo nella pagina
+      function esc(v) {
+        return String(v ?? '').replace(/[&<>"']/g, (c) =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      }
+
       function chip(seats) {
         return '<span class="seat-chips" style="display:inline-flex">' +
           seats.sort((a, b) => a - b).map((s) => `<span>${s}</span>`).join('') + '</span>';
@@ -47,12 +53,12 @@
           }
           const d = await res.json();
           if (d.status === 'cancelled') {
-            card.innerHTML = `<h1>Prenotazione annullata</h1><p class="sub">Il codice <b>${d.code}</b> è stato annullato. I posti sono di nuovo disponibili.</p>`;
+            card.innerHTML = `<h1>Prenotazione annullata</h1><p class="sub">Il codice <b>${esc(d.code)}</b> è stato annullato. I posti sono di nuovo disponibili.</p>`;
             return;
           }
           card.innerHTML = `
             <h1>La tua prenotazione</h1>
-            <p class="sub">Codice <b>${d.code}</b> — intestata a ${d.name}</p>
+            <p class="sub">Codice <b>${esc(d.code)}</b> — intestata a ${esc(d.name)}</p>
             <p style="margin-top:14px">Posti riservati: ${chip(d.seats)}</p>
             <div style="margin-top:22px">
               <button class="btn btn-ghost" id="cancelBtn" style="color:#b91c1c;border-color:#fecaca">
@@ -77,17 +83,22 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code }),
           });
-          if (res.ok) {
+          // 404 = già annullata (es. doppio clic, o annullata da un'altra scheda): per chi
+          // la sta annullando il risultato è lo stesso, quindi mostriamo la conferma.
+          if (res.ok || res.status === 404) {
             card.innerHTML = '<h1>Prenotazione annullata</h1><p class="sub">Grazie per averci avvisato. I posti sono di nuovo disponibili.</p>';
           } else {
-            $('err').textContent = 'Impossibile annullare. Riprova.';
-            $('err').style.display = 'block';
-            btn.disabled = false;
+            showError('Impossibile annullare. Riprova tra qualche istante.');
           }
         } catch {
-          $('err').textContent = 'Errore di connessione.';
+          showError('Errore di connessione. Controlla la rete e riprova.');
+        }
+
+        function showError(msg) {
+          $('err').textContent = msg;
           $('err').style.display = 'block';
           btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Annulla prenotazione';
         }
       }
 
