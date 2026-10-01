@@ -2,7 +2,7 @@
 // Body JSON: { name, email, phone, school, role, notes, consent, seats:[..] }
 
 import { isValidSeat } from '../lib/seatmap.js';
-import { createReservation, getOccupiedSeats } from '../lib/db.js';
+import { createReservation, getOccupiedSeats, countActiveWaitlist } from '../lib/db.js';
 import { sendConfirmation } from '../lib/email.js';
 import { genCode, isEmail } from '../lib/util.js';
 
@@ -34,6 +34,12 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Con persone in lista d'attesa i posti liberati li assegna Antonio dall'admin:
+    // niente prenotazioni dirette (anche da una pagina rimasta aperta col vecchio stato).
+    if ((await countActiveWaitlist()) > 0) {
+      return res.status(409).json({ error: 'waitlist_only' });
+    }
+
     // Pre-check gentile (per messaggio chiaro; l'atomicità la garantisce il DB)
     const occupied = new Set(await getOccupiedSeats());
     const clash = seats.filter((s) => occupied.has(s));

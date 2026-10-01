@@ -17,6 +17,9 @@
     no_seats: 'Seleziona almeno un posto.',
     invalid_seat: 'Uno dei posti selezionati non è valido.',
     seats_taken: 'Spiacenti, uno o più posti sono appena stati prenotati. Ho aggiornato la mappa: scegli altri posti.',
+    waitlist_only: "I posti sono appena terminati: puoi iscriverti alla lista d'attesa qui sotto.",
+    seats_available: 'Si sono appena liberati dei posti: ricarica la pagina per prenotare.',
+    invalid_seats_requested: 'Indica quanti posti ti servono (da 1 a 20).',
     server_error: 'Errore del server. Riprova tra poco.',
     network: 'Problema di connessione. Controlla la rete e riprova.',
   };
@@ -144,7 +147,11 @@
         onSuccess(data);
         return;
       }
-      if (res.status === 409) {
+      if (res.status === 409 && data.error === 'waitlist_only' && $('waitlistSection')) {
+        // Nel frattempo i posti sono finiti: passa alla lista d'attesa
+        showWaitlist();
+        showWaitlistError('waitlist_only');
+      } else if (res.status === 409) {
         // Posti presi nel frattempo: ricarica la mappa
         await refreshMap();
         showError('seats_taken');
@@ -189,10 +196,78 @@
     updateSelectionUI();
   }
 
+  // ---- Lista d'attesa ----
+
+  function showWaitlist() {
+    $('mapSection').classList.add('hidden');
+    $('formSection').classList.add('hidden');
+    $('waitlistSection').classList.remove('hidden');
+  }
+
+  function showWaitlistError(key) {
+    const box = $('waitlistError');
+    box.textContent = ERRORS[key] || ERRORS.server_error;
+    box.style.display = 'block';
+  }
+
+  async function submitWaitlist(e) {
+    e.preventDefault();
+    $('waitlistError').style.display = 'none';
+
+    const payload = {
+      name: $('wName').value.trim(),
+      email: $('wEmail').value.trim(),
+      phone: $('wPhone').value.trim(),
+      school: $('wSchool').value.trim(),
+      role: $('wRole').value,
+      notes: $('wNotes').value.trim(),
+      seatsRequested: Number($('wSeats').value),
+      consent: $('wConsent').checked,
+    };
+
+    const btn = $('waitlistBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        $('waitlistSection').classList.add('hidden');
+        if (data.already) {
+          $('waitlistSuccessText').textContent =
+            'Eri già in lista d’attesa con questa email: se si libera un posto ti scriviamo noi.';
+        }
+        $('waitlistSuccess').style.display = 'block';
+        $('waitlistSuccess').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      showWaitlistError(data.error);
+    } catch {
+      showWaitlistError('network');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = original;
+    }
+  }
+
   async function init() {
+    // Controllo di presenza: se il browser avesse in cache la pagina vecchia (senza
+    // la sezione lista d'attesa) lo script deve comunque caricare la mappa.
+    const hasWaitlist = Boolean($('waitlistForm') && $('waitlistSection'));
+    if (hasWaitlist) $('waitlistForm').addEventListener('submit', submitWaitlist);
     try {
       const data = await loadSeats();
       renderEvent(data.event);
+      if (data.waitlist && hasWaitlist) {
+        showWaitlist();
+        return;
+      }
       state.occupied = new Set(data.occupied);
       renderBlock($('blockLeft'), data.seatmap.left, data.notes);
       renderBlock($('blockRight'), data.seatmap.right, data.notes);

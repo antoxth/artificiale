@@ -249,6 +249,26 @@ indirizzo a cui arrivano le risposte dei docenti; `contactCc` (oggi Paolo, `paol
 le riceve in copia. Le email scritte direttamente a `info@teatrodellescienze.it` NON passano da qui:
 le inoltra **ImprovMX** e i destinatari si cambiano dal loro pannello.
 
+### Lista d'attesa (ottobre 2026)
+Quando i posti finiscono, `/prenota` mostra da sola "Posti esauriti" con un modulo di iscrizione
+al posto della mappa (`/api/seats` → `waitlist: true`).
+- **Modalità lista attiva** se i posti liberi sono 0 **oppure** c'è almeno un iscritto "in attesa"
+  o "avvisato". In questa modalità `/api/reserve` rifiuta le prenotazioni dirette (`waitlist_only`):
+  i posti che si liberano li assegna Antonio a chi aspetta, non il primo che passa.
+- **Tabella** `waitlist` (`db/waitlist.sql`): stati `in_attesa` → `contattato` → `assegnato` | `rinuncia`.
+  Consenso **unico e obbligatorio** (posto liberato + future proposte dello spettacolo nella scuola).
+  Campo obbligatorio **posti richiesti** (`seats_requested`, da 1 a 20): mostrato nell'admin, nelle email e nel CSV;
+  "Assegna posti" propone i primi posti liberi in quel numero.
+  Stessa email attiva = nessun doppione e nessuna email ripetuta.
+- **Email automatiche**: conferma a chi si iscrive + avviso ad Antonio (solo a lui).
+- **Email solo dal pannello admin** (sezione "Lista d'attesa", sempre con conferma):
+  *Avvisa* → "Si è liberato un posto" (risposte ad Antonio); *Assegna posti* → crea la
+  prenotazione e manda la conferma con il codice. CSV dedicato con la colonna del consenso.
+- Funzioni: `api/waitlist.js` (pubblica) e `api/admin/waitlist.js` (tutto l'admin in una sola
+  funzione: il piano Hobby limita il numero di funzioni, oggi sono 11).
+- **Pubblicazione**: eseguire PRIMA `db/waitlist.sql` su Supabase. Il codice comunque tollera la
+  tabella mancante (la pagina resta normale), ma l'iscrizione fallirebbe.
+
 ### Piantina posti — `lib/seatmap.js`
 Fonte unica di verità della disposizione dei posti. Per verificarla visivamente apri
 `preview-mappa.html` con doppio clic (non serve server).

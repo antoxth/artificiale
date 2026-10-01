@@ -3,7 +3,7 @@
 
 import { SEATMAP, SEAT_NOTES } from '../lib/seatmap.js';
 import { EVENT } from '../lib/event.js';
-import { getOccupiedSeats } from '../lib/db.js';
+import { getOccupiedSeats, countActiveWaitlist } from '../lib/db.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -11,6 +11,10 @@ export default async function handler(req, res) {
   }
   try {
     const occupied = await getOccupiedSeats();
+    const remaining = EVENT.capacity - occupied.length;
+    // Modalità lista d'attesa: posti finiti, oppure c'è già qualcuno in attesa
+    // (i posti che si liberano li assegna Antonio a chi aspetta, non il primo che passa).
+    const waitlist = remaining <= 0 || (await countActiveWaitlist()) > 0;
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({
       event: {
@@ -23,7 +27,8 @@ export default async function handler(req, res) {
       seatmap: SEATMAP,
       notes: SEAT_NOTES,
       occupied,
-      remaining: EVENT.capacity - occupied.length,
+      remaining,
+      waitlist,
     });
   } catch (e) {
     console.error('GET /api/seats', e);

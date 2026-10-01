@@ -71,6 +71,70 @@
       </div>
     </section>
 
+    <!-- Lista d'attesa: mostrata al posto della mappa quando i posti sono finiti
+         (o quando c'è già qualcuno in attesa). Vedi /api/seats → waitlist. -->
+    <section class="form-card hidden" id="waitlistSection">
+      <h2 class="section-title">Posti esauriti</h2>
+      <p class="section-hint">Tutti i posti sono stati prenotati. Iscriviti alla <b>lista d'attesa</b>: se si libera un posto ti scriviamo noi.</p>
+
+      <form id="waitlistForm">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="wName">Nome e cognome *</label>
+            <input type="text" id="wName" required placeholder="es. Prof.ssa Maria Rossi" />
+          </div>
+          <div class="form-group">
+            <label for="wEmail">Email *</label>
+            <input type="email" id="wEmail" required placeholder="nome@scuola.it" />
+          </div>
+          <div class="form-group">
+            <label for="wPhone">Telefono</label>
+            <input type="tel" id="wPhone" placeholder="es. 347 1234567" />
+          </div>
+          <div class="form-group">
+            <label for="wSchool">Scuola / Istituto</label>
+            <input type="text" id="wSchool" placeholder="es. Liceo Mancini — Avellino" />
+          </div>
+          <div class="form-group">
+            <label for="wRole">Ruolo</label>
+            <select id="wRole">
+              <option value="">Seleziona…</option>
+              <option>Dirigente scolastico</option>
+              <option>Docente area STEM</option>
+              <option>Docente area umanistica</option>
+              <option>Altro docente / staff</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="wSeats">Quanti posti ti servono? *</label>
+            <input type="number" id="wSeats" required min="1" max="20" step="1" value="1" inputmode="numeric" />
+          </div>
+          <div class="form-group full">
+            <label for="wNotes">Note</label>
+            <textarea id="wNotes" rows="3" placeholder="Eventuali richieste o accompagnatori…"></textarea>
+          </div>
+          <div class="form-group full">
+            <label class="consent">
+              <input type="checkbox" id="wConsent" required />
+              <span>Acconsento a essere ricontattato da Teatro delle Scienze se si libera un posto per l'anteprima e per future proposte dello spettacolo nella mia scuola. Trattamento dei dati ai sensi del Reg. UE 2016/679 (GDPR).</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-error" id="waitlistError"></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="waitlistBtn" style="margin-top:20px">Iscriviti alla lista d'attesa</button>
+      </form>
+    </section>
+
+    <section class="success" id="waitlistSuccess">
+      <i class="fa-solid fa-circle-check"></i>
+      <h2>Sei in lista d'attesa</h2>
+      <p id="waitlistSuccessText">Se si libera un posto ti scriviamo noi via email. Ti abbiamo appena mandato una conferma.</p>
+      <p style="color:var(--muted);font-size:14px;margin-top:14px">L'iscrizione non è una prenotazione: il posto è confermato solo quando ricevi l'email con il codice.</p>
+      <p style="margin-top:20px"><a href="/">Torna al sito</a></p>
+    </section>
+
     <!-- Form dati -->
     <section class="form-card hidden" id="formSection">
       <h2 class="section-title">I tuoi dati</h2>
@@ -137,6 +201,6 @@
     </section>
   </main>
 
-  <script src="assets/prenota.js"></script>
+  <script src="assets/prenota.js?v=2"></script>
 </body>
 </html>

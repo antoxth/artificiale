@@ -95,8 +95,158 @@
       if (e.message === 'unauthorized') {
         sessionStorage.removeItem(KEY);
         showLogin();
+        return;
       }
     }
+    loadWaitlist();
+  }
+
+  // ---- Lista d'attesa ----
+
+  const WL_LABEL = { in_attesa: 'In attesa', contattato: 'Avvisato', assegnato: 'Posto assegnato', rinuncia: 'Rinuncia' };
+  let wlEntries = [];
+  let wlFreeSeats = [];
+
+  function itDate(d) {
+    return d ? new Date(d).toLocaleString('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+  }
+
+  async function loadWaitlist() {
+    if (!$('wlBody')) return; // pagina admin vecchia in cache: niente sezione lista
+    try {
+      const res = await fetch('/api/admin/waitlist', { headers: headers() });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      wlEntries = data.entries;
+      wlFreeSeats = data.freeSeats;
+      renderWaitlist(data);
+    } catch {
+      $('wlBody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center;color:#b91c1c">Lista d’attesa non disponibile al momento. Riprova con "Aggiorna".</td></tr>';
+    }
+  }
+
+  function renderWaitlist(data) {
+    $('wlWaiting').textContent = data.totals.in_attesa;
+    $('wlContacted').textContent = data.totals.contattato;
+    $('wlAssigned').textContent = data.totals.assegnato;
+    $('wlDeclined').textContent = data.totals.rinuncia;
+    $('wlFree').innerHTML =
+      (data.freeSeats.length
+        ? `Posti liberi ora: <b>${data.freeSeats.join(', ')}</b>`
+        : 'Posti liberi ora: <b>nessuno</b>') +
+      ` · Posti richiesti da chi aspetta: <b>${data.totals.postiRichiesti}</b>`;
+
+    if (!data.entries.length) {
+      $('wlBody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center;color:var(--muted)">Nessuno in lista d’attesa.</td></tr>';
+      return;
+    }
+
+    $('wlBody').innerHTML = data.entries.map((e) => {
+      const btns = [];
+      if (e.status === 'in_attesa' || e.status === 'contattato') {
+        btns.push(`<button class="btn btn-ghost" data-act="offer" data-id="${e.id}"><i class="fa-solid fa-envelope"></i> ${e.status === 'contattato' ? 'Avvisa di nuovo' : 'Avvisa'}</button>`);
+        btns.push(`<button class="btn btn-primary" data-act="assign" data-id="${e.id}"><i class="fa-solid fa-chair"></i> Assegna posti</button>`);
+        btns.push(`<button class="btn btn-ghost" data-act="decline" data-id="${e.id}">Rinuncia</button>`);
+      } else if (e.status === 'rinuncia') {
+        btns.push(`<button class="btn btn-ghost" data-act="restore" data-id="${e.id}">Rimetti in attesa</button>`);
+      }
+      const extra = e.status === 'assegnato' && e.reservation_code
+        ? `<br><small>codice <code>${esc(e.reservation_code)}</code></small>`
+        : e.status === 'contattato' && e.contacted_at ? `<br><small>avvisato ${esc(itDate(e.contacted_at))}</small>` : '';
+      return `
+      <tr>
+        <td>${e.n}<br><small>${esc(itDate(e.created_at))}</small></td>
+        <td><span class="wl-seats">${Number(e.seats_requested) || 1}</span></td>
+        <td>${esc(e.name)}${e.role ? `<br><small>${esc(e.role)}</small>` : ''}${e.notes ? `<br><small>“${esc(e.notes)}”</small>` : ''}</td>
+        <td>${esc(e.school || '—')}</td>
+        <td><small>${esc(e.email)}${e.phone ? '<br>' + esc(e.phone) : ''}</small></td>
+        <td><span class="wl-status wl-${esc(e.status)}">${esc(WL_LABEL[e.status] || e.status)}</span>${extra}</td>
+        <td><div class="wl-actions">${btns.join('')}</div></td>
+      </tr>`;
+    }).join('');
+
+    $('wlBody').querySelectorAll('button[data-act]').forEach((b) => {
+      b.addEventListener('click', () => waitlistAction(b.dataset.act, Number(b.dataset.id), b));
+    });
+  }
+
+  async function postWaitlist(body) {
+    const res = await fetch('/api/admin/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...headers() },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json().catch(() => ({}));
+    return { ok: res.ok && data.ok, data };
+  }
+
+  const WL_ERRORS = {
+    seats_taken: 'Uno o più di quei posti sono già occupati.',
+    invalid_seat: 'Numero di posto non valido.',
+    no_seats: 'Indica almeno un posto.',
+    already_assigned: 'A questa persona è già stato assegnato un posto.',
+    not_waiting: 'Questa persona non è più in attesa.',
+  };
+
+  async function waitlistAction(act, id, btn) {
+    const e = wlEntries.find((x) => x.id === id);
+    if (!e) return;
+    let body;
+
+    if (act === 'offer') {
+      if (!confirm(`Invio a ${e.name} (${e.email}) l'email "Si è liberato un posto"?\n\nLe sue risposte arriveranno a te.`)) return;
+      body = { action: 'offer', id };
+    } else if (act === 'assign') {
+      const wanted = Number(e.seats_requested) || 1;
+      const hint = wlFreeSeats.length ? `Posti liberi ora: ${wlFreeSeats.join(', ')}` : 'Al momento non risultano posti liberi.';
+      // Proposta: i primi posti liberi, quanti ne ha chiesti (modificabile)
+      const suggestion = wlFreeSeats.slice(0, wanted).join(', ');
+      const input = prompt(`${e.name} ha chiesto ${wanted} ${wanted === 1 ? 'posto' : 'posti'}.\nQuali posti assegno? Numeri separati da virgola.\n\n${hint}`, suggestion);
+      if (input === null) return;
+      const seats = input.split(/[\s,;]+/).map(Number).filter((n) => Number.isInteger(n) && n > 0);
+      if (!seats.length) return alert(WL_ERRORS.no_seats);
+      const diff = seats.length !== wanted ? `\n\nAttenzione: ne aveva chiesti ${wanted}, ne assegni ${seats.length}.` : '';
+      if (!confirm(`Assegno ${seats.length === 1 ? 'il posto' : 'i posti'} ${seats.join(', ')} a ${e.name} e invio la conferma con il codice a ${e.email}?${diff}`)) return;
+      body = { action: 'assign', id, seats };
+    } else if (act === 'decline') {
+      if (!confirm(`Segno ${e.name} come "Rinuncia"? Non riceverà nessuna email.`)) return;
+      body = { action: 'status', id, status: 'rinuncia' };
+    } else if (act === 'restore') {
+      body = { action: 'status', id, status: 'in_attesa' };
+    } else {
+      return;
+    }
+
+    btn.disabled = true;
+    const { ok, data } = await postWaitlist(body);
+    if (!ok) {
+      alert(WL_ERRORS[data.error] || 'Operazione non riuscita. Riprova.');
+      btn.disabled = false;
+      return;
+    }
+    if (act === 'assign') {
+      alert(`Fatto: prenotazione ${data.code} creata.` + (data.emailed ? ' Conferma inviata.' : ' ATTENZIONE: la conferma email non è partita.'));
+    }
+    load(); // riallinea prenotazioni, conteggi e lista
+  }
+
+  function downloadWaitlistCsv() {
+    fetch('/api/admin/waitlist?format=csv', { headers: headers() })
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.blob();
+      })
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'lista-attesa-anteprima-docenti.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch(() => alert('Esportazione non riuscita. Riprova.'));
   }
 
   function showLogin() {
@@ -151,6 +301,7 @@
     });
     $('exportBtn').addEventListener('click', downloadCsv);
     $('refreshBtn').addEventListener('click', load);
+    if ($('wlExportBtn')) $('wlExportBtn').addEventListener('click', downloadWaitlistCsv);
 
     // Se già loggato in questa sessione, entra diretto
     if (pw()) showDashboard();
