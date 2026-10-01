@@ -28,6 +28,12 @@ export default async function handler(req, res) {
     console.error('cron keep-alive: ping DB fallito', e);
   }
 
+  // Promemoria sospesi a mano (EVENT.remindersPaused): esce DOPO il keep-alive,
+  // così il database resta sveglio, e prima di leggere o segnare qualsiasi prenotazione.
+  if (EVENT.remindersPaused) {
+    return res.status(200).json({ ok: true, sent: 0, reason: 'paused', dbAlive, schema });
+  }
+
   // Finestra temporale: manda solo se l'evento è entro N ore (e non è passato).
   const now = Date.now();
   const eventTime = new Date(EVENT.dateISO).getTime();
