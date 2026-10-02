@@ -37,6 +37,12 @@
     .parking li:last-child { border-bottom: none; padding-bottom: 0; }
     .parking .name { font-weight: 600; }
     .parking .dist { color: var(--muted); font-size: 14px; margin-top: 2px; }
+    .parking .note { font-size: 14px; margin-top: 2px; }
+    .parking .tag {
+      display: inline-block; margin-bottom: 5px;
+      background: var(--gold); color: #fff; border-radius: 5px; padding: 2px 7px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    }
     .parking a {
       flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
       color: var(--gold-dark, #8F6F2C); border: 1.5px solid var(--gold); border-radius: 9px;
@@ -72,7 +78,7 @@
       <h2 class="section-title">Dove parcheggiare</h2>
       <ul class="parking">
         <li>
-          <div><div class="name">Parcheggio sotterraneo del teatro</div><div class="dist">a 4 metri dal teatro</div></div>
+          <div><div class="name">Parcheggio in prossimità del teatro</div><div class="dist">a 4 metri dal teatro</div><div class="note">Pochi posti disponibili</div></div>
           <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9102906,14.7444656">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
         </li>
         <li>
@@ -80,7 +86,7 @@
           <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9098304,14.7438927">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
         </li>
         <li>
-          <div><div class="name">Parcheggio della chiesa di Torelli</div><div class="dist">a 200 metri dal teatro</div></div>
+          <div><span class="tag">Consigliato</span><div class="name">Parcheggio della chiesa di Torelli</div><div class="dist">a 200 metri dal teatro</div></div>
           <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9087856,14.7451459">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
         </li>
         <li>
