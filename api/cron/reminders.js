@@ -7,6 +7,11 @@ import { getPendingReminders, markReminded, pingDb, checkSchema } from '../../li
 import { sendReminder } from '../../lib/email.js';
 import { EVENT } from '../../lib/event.js';
 
+// Distanza minima tra l'inizio di un invio e il successivo: al massimo 4 al secondo,
+// ben sotto il limite di Resend (10 al secondo per account, ottobre 2026).
+const REMINDER_GAP_MS = 250;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export default async function handler(req, res) {
   if (!isCron(req)) return res.status(401).json({ error: 'unauthorized' });
 
@@ -54,17 +59,41 @@ export default async function handler(req, res) {
       byCode.get(r.code).seats.push(r.seat);
     }
 
+    // Se Resend rifiuta un invio (troppa fretta, indirizzo non valido, disservizio) risponde
+    // { error } SENZA eccezione e l'email non parte. Quindi: distanziamo gli invii, ritentiamo
+    // una volta se ci dice di rallentare, e segniamo "avvisato" solo chi è stato davvero
+    // inviato (2/10/2026). Chi resta non segnato verrà ripreso dal cron del giorno dopo.
     let sent = 0;
+    const failed = [];
+    let lastStart = 0;
+    const send = async (g) => {
+      const wait = REMINDER_GAP_MS - (Date.now() - lastStart);
+      if (wait > 0) await sleep(wait);
+      lastStart = Date.now();
+      return sendReminder({ to: g.email, name: g.name, code: g.code, seats: g.seats });
+    };
     for (const g of byCode.values()) {
-      const r = await sendReminder({ to: g.email, name: g.name, code: g.code, seats: g.seats });
-      // Segna come avvisato solo se l'email è partita davvero (non skipped)
-      if (!(r && r.skipped)) {
-        await markReminded(g.code);
-        sent++;
+      let r;
+      try {
+        r = await send(g);
+        if (r?.error && (r.error.statusCode === 429 || r.error.name === 'rate_limit_exceeded')) {
+          await sleep(1500);
+          r = await send(g);
+        }
+      } catch (e) {
+        r = { error: e };
       }
+      if (r?.skipped) continue;
+      if (!r || r.error) {
+        console.error('Promemoria NON inviato', g.code, r?.error);
+        failed.push(g.code);
+        continue;
+      }
+      await markReminded(g.code);
+      sent++;
     }
 
-    return res.status(200).json({ ok: true, sent, bookings: byCode.size });
+    return res.status(200).json({ ok: true, sent, failed, bookings: byCode.size });
   } catch (e) {
     console.error('GET /api/cron/reminders', e);
     return res.status(500).json({ error: 'server_error' });

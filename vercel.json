@@ -11,6 +11,9 @@
     { "source": "/preview-mappa", "destination": "/", "permanent": false },
     { "source": "/preview-mappa.html", "destination": "/", "permanent": false }
   ],
+  "functions": {
+    "api/cron/reminders.js": { "maxDuration": 60 }
+  },
   "crons": [
     {
       "path": "/api/cron/reminders",
