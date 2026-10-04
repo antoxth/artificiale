@@ -3,8 +3,9 @@
 
 import { isValidSeat } from '../lib/seatmap.js';
 import { createReservation, getOccupiedSeats, countActiveWaitlist } from '../lib/db.js';
-import { sendConfirmation } from '../lib/email.js';
+import { sendConfirmation, sendBookingNotice } from '../lib/email.js';
 import { genCode, isEmail } from '../lib/util.js';
+import { EVENT } from '../lib/event.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -64,6 +65,18 @@ export default async function handler(req, res) {
       emailed = !(r && r.skipped);
     } catch (mailErr) {
       console.error('Invio conferma fallito:', mailErr);
+    }
+
+    // Avviso ad Antonio della nuova prenotazione (best-effort, come la conferma)
+    try {
+      const remaining = EVENT.capacity - (await getOccupiedSeats()).length;
+      await sendBookingNotice({
+        code, name, email, phone, school, role, notes,
+        seats: [...seats].sort((a, c) => a - c),
+        remaining,
+      });
+    } catch (mailErr) {
+      console.error('Avviso nuova prenotazione non inviato:', mailErr);
     }
 
     return res.status(200).json({ ok: true, code, seats, emailed });
