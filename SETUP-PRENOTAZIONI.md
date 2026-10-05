@@ -47,11 +47,11 @@ Imposta su Vercel:
 
 ### 4. Data dell'evento
 Apri `lib/event.js` e imposta `dateISO` (e `dateLabel`) con la data reale.
-Serve anche a far partire i promemoria nella finestra corretta (`reminderHoursBefore`, default 48h).
+Serve anche a far partire i promemoria nella finestra corretta (`reminderHoursBefore`, 60h).
 
 ### 5. Deploy
 Push su GitHub → Vercel builda in automatico (installa `@vercel/postgres` e `resend`).
-Il cron dei promemoria è già dichiarato in `vercel.json` (gira ogni giorno alle 9:00; invia solo
+Il cron dei promemoria è già dichiarato in `vercel.json` (gira ogni giorno alle 13:00 UTC, cioè 15:00 in Italia; invia solo
 quando l'evento è entro la finestra impostata).
 
 ---

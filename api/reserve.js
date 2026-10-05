@@ -2,8 +2,8 @@
 // Body JSON: { name, email, phone, school, role, notes, consent, seats:[..] }
 
 import { isValidSeat } from '../lib/seatmap.js';
-import { createReservation, getOccupiedSeats } from '../lib/db.js';
-import { sendConfirmation } from '../lib/email.js';
+import { createReservation, getOccupiedSeats, countActiveWaitlist } from '../lib/db.js';
+import { sendConfirmation, sendBookingNotice } from '../lib/email.js';
 import { genCode, isEmail } from '../lib/util.js';
 import { EVENT } from '../lib/event.js';
 
@@ -40,6 +40,12 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Con persone in lista d'attesa i posti liberati li assegna Antonio dall'admin:
+    // niente prenotazioni dirette (anche da una pagina rimasta aperta col vecchio stato).
+    if ((await countActiveWaitlist()) > 0) {
+      return res.status(409).json({ error: 'waitlist_only' });
+    }
+
     // Pre-check gentile (per messaggio chiaro; l'atomicità la garantisce il DB)
     const occupied = new Set(await getOccupiedSeats());
     const clash = seats.filter((s) => occupied.has(s));
@@ -64,6 +70,18 @@ export default async function handler(req, res) {
       emailed = !(r && r.skipped);
     } catch (mailErr) {
       console.error('Invio conferma fallito:', mailErr);
+    }
+
+    // Avviso ad Antonio della nuova prenotazione (best-effort, come la conferma)
+    try {
+      const remaining = EVENT.capacity - (await getOccupiedSeats()).length;
+      await sendBookingNotice({
+        code, name, email, phone, school, role, notes,
+        seats: [...seats].sort((a, c) => a - c),
+        remaining,
+      });
+    } catch (mailErr) {
+      console.error('Avviso nuova prenotazione non inviato:', mailErr);
     }
 
     return res.status(200).json({ ok: true, code, seats, emailed });

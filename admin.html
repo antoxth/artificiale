@@ -57,8 +57,53 @@
     <p class="section-hint" style="margin-top:14px">
       Clicca un posto nella colonna "Presenza" per registrare/annullare il check-in all'ingresso.
     </p>
+
+    <!-- Lista d'attesa: sezione separata. Nessuna email parte da sola verso chi è in lista:
+         solo dai pulsanti "Avvisa" e "Assegna posti", sempre con conferma. -->
+    <section id="waitlistAdmin" style="margin-top:48px">
+      <h2 style="margin-bottom:4px">Lista d'attesa</h2>
+      <p class="section-hint">Le email alle persone in lista partono <b>solo</b> quando premi un pulsante, dopo una conferma.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="n" id="wlWaiting">0</div><div class="l">In attesa</div></div>
+        <div class="stat"><div class="n" id="wlContacted">0</div><div class="l">Avvisati</div></div>
+        <div class="stat"><div class="n" id="wlAssigned">0</div><div class="l">Posto assegnato</div></div>
+        <div class="stat"><div class="n" id="wlDeclined">0</div><div class="l">Rinunce</div></div>
+      </div>
+
+      <p class="section-hint" id="wlFree">Posti liberi ora: —</p>
+
+      <div class="toolbar">
+        <button class="btn btn-primary" id="wlExportBtn"><i class="fa-solid fa-file-csv"></i> Esporta CSV lista d'attesa</button>
+      </div>
+
+      <table class="data">
+        <thead>
+          <tr><th>N.</th><th>Posti</th><th>Nome</th><th>Scuola</th><th>Contatti</th><th>Stato</th><th>Azioni</th></tr>
+        </thead>
+        <tbody id="wlBody">
+          <tr><td colspan="7" style="text-align:center;color:var(--muted)">Caricamento…</td></tr>
+        </tbody>
+      </table>
+      <p class="section-hint" style="margin-top:14px">
+        <b>Avvisa</b>: manda "si è liberato un posto"; la risposta arriva a te.
+        <b>Assegna posti</b>: crea la prenotazione e manda la conferma con il codice.
+      </p>
+    </section>
   </main>
 
-  <script src="assets/admin.js"></script>
+  <style>
+    .wl-seats { font-size: 18px; font-weight: 800; color: var(--gold-dark, #8F6F2C); }
+    .wl-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .wl-actions .btn { padding: 7px 11px; font-size: 13px; }
+    .wl-status { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+    .wl-in_attesa { background: #eff6ff; color: #1d4ed8; }
+    .wl-contattato { background: #fef3c7; color: #92400e; }
+    .wl-assegnato { background: #ecfdf5; color: #047857; }
+    .wl-rinuncia { background: #f1f5f9; color: #64748b; }
+    #wlBody small { color: var(--muted); }
+  </style>
+
+  <script src="assets/admin.js?v=2"></script>
 </body>
 </html>

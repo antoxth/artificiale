@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Pagina di servizio per l'Anteprima Docenti (4/10/2026): solo per chi ha il link. -->
+  <meta name="robots" content="noindex" />
+  <title>Come arrivare e dove parcheggiare — Artificiale sarà lei</title>
+  <meta name="description" content="Indicazioni per raggiungere il Teatro 99 Posti a Torelli di Mercogliano e parcheggi vicini." />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
+  <link rel="stylesheet" href="assets/prenota.css" />
+  <style>
+    .wrap { max-width: 560px; }
+    .kicker {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold-dark, #8F6F2C); margin-bottom: 8px;
+    }
+    .when { font-size: 17px; font-weight: 700; margin-top: 14px; }
+    .where { color: var(--muted); margin-top: 4px; line-height: 1.5; }
+    .btn-maps {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 20px; text-decoration: none; font-size: 16px; padding: 15px 22px;
+    }
+    .parking { list-style: none; margin: 0; padding: 0; }
+    .parking li {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .parking li:last-child { border-bottom: none; padding-bottom: 0; }
+    .parking .name { font-weight: 600; }
+    .parking .dist { color: var(--muted); font-size: 14px; margin-top: 2px; }
+    .parking .note { font-size: 14px; margin-top: 2px; }
+    .parking .tag {
+      display: inline-block; margin-bottom: 5px;
+      background: var(--gold); color: #fff; border-radius: 5px; padding: 2px 7px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    }
+    .parking a {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+      color: var(--gold-dark, #8F6F2C); border: 1.5px solid var(--gold); border-radius: 9px;
+      padding: 9px 13px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .parking a:hover { background: var(--gold); color: #fff; }
+  </style>
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">Artificiale <span>sarà lei</span></span>
+    <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
+  </header>
+
+  <!--
+    Dati presi da lib/event.js (venue, venueLat/venueLng, parking), che alimenta anche
+    l'email di promemoria. Se cambiano lì, aggiornarli anche qui.
+  -->
+  <main class="wrap">
+    <section class="event-card">
+      <p class="kicker">Anteprima Docenti</p>
+      <h1>Come arrivare</h1>
+      <p class="when"><i class="fa-solid fa-calendar-day" style="color:var(--gold)"></i> Domenica 4 ottobre 2026 · ore 18:30</p>
+      <p class="where"><b>Teatro 99 Posti</b><br>Via Traversa 91, Torelli di Mercogliano (AV)</p>
+      <a class="btn btn-primary btn-maps" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9102906,14.7444656">
+        <i class="fa-solid fa-location-arrow"></i> Apri il percorso in Google Maps
+      </a>
+    </section>
+
+    <section class="event-card">
+      <h2 class="section-title">Dove parcheggiare</h2>
+      <ul class="parking">
+        <li>
+          <div><div class="name">Parcheggio in prossimità del teatro</div><div class="dist">a 4 metri dal teatro</div><div class="note">Pochi posti disponibili</div></div>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9102906,14.7444656">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
+        </li>
+        <li>
+          <div><div class="name">Piazza Vecchiarelli</div><div class="dist">a 75 metri dal teatro</div></div>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9098304,14.7438927">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
+        </li>
+        <li>
+          <div><span class="tag">Consigliato</span><div class="name">Parcheggio della chiesa di Torelli</div><div class="dist">a 200 metri dal teatro</div></div>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9087856,14.7451459">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
+        </li>
+        <li>
+          <div><div class="name">Parcheggio del cimitero di Torelli</div><div class="dist">a 250 metri dal teatro</div></div>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=40.9125433,14.7450337">Portami qui <i class="fa-solid fa-chevron-right"></i></a>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

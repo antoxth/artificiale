@@ -65,7 +65,7 @@ artificiale-sara-lei/
 │   ├── cancel.js         ← annulla una prenotazione
 │   ├── contact.js        ← invio del form contatti della home
 │   ├── admin/            ← list.js, checkin.js, export.js (dietro password)
-│   └── cron/reminders.js ← promemoria email + ping keep-alive del DB (Vercel Cron, ogni giorno alle 9:00)
+│   └── cron/reminders.js ← promemoria email + ping keep-alive del DB (Vercel Cron, ogni giorno alle 13:00 UTC = 15:00 in Italia)
 │
 ├── .github/workflows/
 │   └── keepalive.yml     ← chiama /api/seats ogni 6h per non far addormentare Supabase
@@ -230,14 +230,28 @@ git push origin main
 
 ## 8. Sistema di prenotazione (dettagli)
 
+> **★ Stato dal 5 ottobre 2026: prenotazioni CHIUSE (sito "dopo l'anteprima").**
+> - `bookingOpen: false` in `lib/event.js`: `/api/reserve` e `/api/waitlist` rispondono 410 e non
+>   parte nessuna email (né conferma né avviso ad Antonio).
+> - `/prenota`, `/prenotazione` e `/99posti` reindirizzano alla home (`vercel.json`, redirect 307).
+>   Le pagine restano nel codice.
+> - Restano attivi: `/admin` (elenco, lista d'attesa, **export CSV**), il cron giornaliero (solo
+>   keep-alive del database: `remindersPaused: true` e l'evento è passato) e il keep-alive GitHub.
+> - Home: menu "Contattaci", nessun pulsante o dato strutturato dell'anteprima; Teatro 99 Posti
+>   resta tra i partner. La risposta automatica del form invita a guardare il trailer.
+> - **Per un nuovo evento**: aggiornare data e luogo in `lib/event.js`, rimettere `bookingOpen: true`
+>   e `remindersPaused: false`, togliere i 6 redirect di prenota/prenotazione/99posti e riportare
+>   il pulsante "Prenota" nella home. Con un evento nuovo conviene cambiare anche `id`, così le
+>   prenotazioni vecchie restano separate nel database.
+
 Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 
 - **`/prenota`** → mappa dei **99 posti** (Teatro 99 Posti), data unica, ingresso gratuito.
   L'utente sceglie i posti, compila il form → riceve **email con codice** e link di disdetta.
 - **`/prenotazione?code=…`** → annulla una prenotazione (libera i posti).
 - **`/admin`** → password (`ADMIN_PASSWORD`): conteggi live, elenco, **check-in**, **export CSV**.
-- **Promemoria automatico**: `api/cron/reminders.js`, schedulato in `vercel.json` (ogni giorno alle 9:00);
-  invia solo quando l'evento è dentro la finestra `reminderHoursBefore` (default 48h).
+- **Promemoria automatico**: `api/cron/reminders.js`, schedulato in `vercel.json` (ogni giorno alle 13:00 UTC = 15:00–15:59 in Italia);
+  invia solo quando l'evento è dentro la finestra `reminderHoursBefore` (60h: primo invio il venerdì pomeriggio per uno spettacolo di domenica sera). Il promemoria contiene il pulsante per annullare la prenotazione.
 
 ### ★ Dati dell'evento — `lib/event.js`
 È l'**UNICO** punto dove cambiare data, ora, luogo, capienza, email di contatto dello spettacolo.
@@ -248,6 +262,26 @@ La data serve anche a far partire i promemoria: aggiornala qui e basta.
 indirizzo a cui arrivano le risposte dei docenti; `contactCc` (oggi Paolo, `paolozzo63@gmail.com`)
 le riceve in copia. Le email scritte direttamente a `info@teatrodellescienze.it` NON passano da qui:
 le inoltra **ImprovMX** e i destinatari si cambiano dal loro pannello.
+
+### Lista d'attesa (ottobre 2026)
+Quando i posti finiscono, `/prenota` mostra da sola "Posti esauriti" con un modulo di iscrizione
+al posto della mappa (`/api/seats` → `waitlist: true`).
+- **Modalità lista attiva** se i posti liberi sono 0 **oppure** c'è almeno un iscritto "in attesa"
+  o "avvisato". In questa modalità `/api/reserve` rifiuta le prenotazioni dirette (`waitlist_only`):
+  i posti che si liberano li assegna Antonio a chi aspetta, non il primo che passa.
+- **Tabella** `waitlist` (`db/waitlist.sql`): stati `in_attesa` → `contattato` → `assegnato` | `rinuncia`.
+  Consenso **unico e obbligatorio** (posto liberato + future proposte dello spettacolo nella scuola).
+  Campo obbligatorio **posti richiesti** (`seats_requested`, da 1 a 20): mostrato nell'admin, nelle email e nel CSV;
+  "Assegna posti" propone i primi posti liberi in quel numero.
+  Stessa email attiva = nessun doppione e nessuna email ripetuta.
+- **Email automatiche**: conferma a chi si iscrive + avviso ad Antonio (solo a lui).
+- **Email solo dal pannello admin** (sezione "Lista d'attesa", sempre con conferma):
+  *Avvisa* → "Si è liberato un posto" (risposte ad Antonio); *Assegna posti* → crea la
+  prenotazione e manda la conferma con il codice. CSV dedicato con la colonna del consenso.
+- Funzioni: `api/waitlist.js` (pubblica) e `api/admin/waitlist.js` (tutto l'admin in una sola
+  funzione: il piano Hobby limita il numero di funzioni, oggi sono 11).
+- **Pubblicazione**: eseguire PRIMA `db/waitlist.sql` su Supabase. Il codice comunque tollera la
+  tabella mancante (la pagina resta normale), ma l'iscrizione fallirebbe.
 
 ### Piantina posti — `lib/seatmap.js`
 Fonte unica di verità della disposizione dei posti. Per verificarla visivamente apri

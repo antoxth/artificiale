@@ -2,13 +2,28 @@
   "version": 2,
   "name": "artificiale-sara-lei",
   "cleanUrls": true,
+  "regions": ["fra1"],
   "redirects": [
-    { "source": "/prenota", "destination": "/", "permanent": false }
+    { "source": "/prenota", "destination": "/", "permanent": false },
+    { "source": "/prenota.html", "destination": "/", "permanent": false },
+    { "source": "/prenotazione", "destination": "/", "permanent": false },
+    { "source": "/prenotazione.html", "destination": "/", "permanent": false },
+    { "source": "/99posti", "destination": "/", "permanent": false },
+    { "source": "/99posti.html", "destination": "/", "permanent": false },
+    { "source": "/lib/:path*", "destination": "/", "permanent": false },
+    { "source": "/db/:path*", "destination": "/", "permanent": false },
+    { "source": "/.github/:path*", "destination": "/", "permanent": false },
+    { "source": "/:path(.*\\.md)", "destination": "/", "permanent": false },
+    { "source": "/preview-mappa", "destination": "/", "permanent": false },
+    { "source": "/preview-mappa.html", "destination": "/", "permanent": false }
   ],
+  "functions": {
+    "api/cron/reminders.js": { "maxDuration": 60 }
+  },
   "crons": [
     {
       "path": "/api/cron/reminders",
-      "schedule": "0 9 * * *"
+      "schedule": "0 13 * * *"
     }
   ]
 }
