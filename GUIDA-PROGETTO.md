@@ -244,6 +244,17 @@ git push origin main
 >   il pulsante "Prenota" nella home. Con un evento nuovo conviene cambiare anche `id`, così le
 >   prenotazioni vecchie restano separate nel database.
 
+> **★ `/anteprima` — materiali generati in diretta (dal 5 ottobre 2026).**
+> - `anteprima.html` + `assets/anteprima/`: poesia, dipinto, canzone, immagine e video creati con il
+>   pubblico, ognuno con il suo prompt; un solo download, lo zip "Scarica tutto". `noindex`, nessun
+>   link dal sito, fuori dalla sitemap: ci si arriva dal link della mail post-spettacolo.
+> - **Contatore**: lo script della pagina manda visite e clic su "Scarica tutto" a `/api/track`
+>   (tabella `page_events`, `db/page_events.sql`). I link nelle due mail sono
+>   `/anteprima?m=presenti` e `/anteprima?m=assenti`; i numeri si vedono in `/admin` (sezione in
+>   alto), con la percentuale calcolata su `anteprimaMailRecipients` in `lib/event.js`.
+>   Il browser di chi apre `/admin` non viene più contato. Con `api/track.js` le funzioni sono 12:
+>   il massimo del piano Hobby, quindi una funzione nuova va accorpata a una esistente.
+
 Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 
 - **`/prenota`** → mappa dei **99 posti** (Teatro 99 Posti), data unica, ingresso gratuito.

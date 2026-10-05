@@ -29,6 +29,20 @@
 
   <!-- Dashboard -->
   <main class="wrap hidden" id="dashboard">
+    <!-- Contatore della pagina /anteprima (materiali dell'Anteprima Docenti), dati da /api/track.
+         I link nelle due mail post-spettacolo sono /anteprima?m=presenti e /anteprima?m=assenti. -->
+    <section id="trackAdmin" style="margin-bottom:44px">
+      <h2 style="margin-bottom:4px">Pagina /anteprima · mail post-spettacolo</h2>
+      <p class="section-hint">Quante persone aprono la pagina dei materiali dal link della mail. Le visite da un browser in cui hai aperto questo pannello non vengono contate.</p>
+      <div class="stats">
+        <div class="stat"><div class="n" id="trPresenti">–</div><div class="l" id="trPresentiL">Dalla mail ai presenti</div></div>
+        <div class="stat"><div class="n" id="trAssenti">–</div><div class="l" id="trAssentiL">Dalla mail agli assenti</div></div>
+        <div class="stat"><div class="n" id="trVisitors">–</div><div class="l">Visitatori unici in totale</div></div>
+        <div class="stat"><div class="n" id="trDownloads">–</div><div class="l">Hanno scaricato il materiale</div></div>
+      </div>
+      <p class="section-hint" id="trNote"></p>
+    </section>
+
     <h1 id="evTitle" style="margin-bottom:4px">Prenotazioni</h1>
     <p class="section-hint" id="evDate">—</p>
 
@@ -104,6 +118,6 @@
     #wlBody small { color: var(--muted); }
   </style>
 
-  <script src="assets/admin.js?v=2"></script>
+  <script src="assets/admin.js?v=3"></script>
 </body>
 </html>

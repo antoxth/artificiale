@@ -99,6 +99,41 @@
       }
     }
     loadWaitlist();
+    loadTrack();
+  }
+
+  // ---- Contatore pagina /anteprima ----
+
+  async function loadTrack() {
+    if (!$('trackAdmin')) return;
+    try {
+      const res = await fetch('/api/track', { headers: headers() });
+      if (!res.ok) throw new Error(String(res.status));
+      renderTrack(await res.json());
+    } catch {
+      $('trNote').textContent = 'Contatore non disponibile al momento. Riprova con "Aggiorna".';
+    }
+  }
+
+  function renderTrack(data) {
+    const by = {};
+    for (const r of data.bySource) by[r.source] = r;
+    const rec = data.recipients || {};
+    const group = (key, label) => {
+      const n = by[key] ? by[key].visitors : 0;
+      $('tr' + label).textContent = n;
+      const tot = rec[key];
+      const base = key === 'presenti' ? 'Dalla mail ai presenti' : 'Dalla mail agli assenti';
+      $('tr' + label + 'L').textContent = tot ? `${base} · ${Math.round((n / tot) * 100)}% di ${tot}` : base;
+    };
+    group('presenti', 'Presenti');
+    group('assenti', 'Assenti');
+    $('trVisitors').textContent = data.totals.visitors;
+    $('trDownloads').textContent = data.totals.downloaders;
+    const direct = by.diretto ? by.diretto.visitors : 0;
+    const last = data.totals.last_at ? ` · Ultima visita: ${itDate(data.totals.last_at)}` : '';
+    $('trNote').textContent =
+      `Aperture totali, comprese quelle ripetute: ${data.totals.views} · Arrivati senza il link della mail: ${direct}${last}`;
   }
 
   // ---- Lista d'attesa ----
@@ -256,6 +291,8 @@
   }
 
   function showDashboard() {
+    // Chi usa il pannello (Antonio, Paolo) non va contato tra i visitatori di /anteprima
+    try { localStorage.setItem('asl_notrack', '1'); } catch {}
     $('loginBox').classList.add('hidden');
     $('dashboard').classList.remove('hidden');
     $('logoutBtn').classList.remove('hidden');
