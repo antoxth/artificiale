@@ -5,10 +5,16 @@ import { isValidSeat } from '../lib/seatmap.js';
 import { createReservation, getOccupiedSeats } from '../lib/db.js';
 import { sendConfirmation } from '../lib/email.js';
 import { genCode, isEmail } from '../lib/util.js';
+import { EVENT } from '../lib/event.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Evento concluso: nessuna nuova prenotazione e nessuna email di conferma
+  if (!EVENT.bookingOpen) {
+    return res.status(410).json({ error: 'booking_closed' });
   }
 
   const b = req.body || {};

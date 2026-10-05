@@ -2,6 +2,9 @@
   "version": 2,
   "name": "artificiale-sara-lei",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/prenota", "destination": "/", "permanent": false }
+  ],
   "crons": [
     {
       "path": "/api/cron/reminders",

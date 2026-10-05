@@ -45,54 +45,11 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="stylesheet" href="style.css?v=2.3">
 
     <!-- Vercel Web Analytics (attivare da: Vercel → progetto → Analytics) -->
     <script defer src="/_vercel/insights/script.js"></script>
 
-    <!-- Dati strutturati: evento teatrale (per i risultati arricchiti di Google) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TheaterEvent",
-      "name": "Artificiale sarà lei — Lezione-spettacolo sull'Intelligenza Artificiale",
-      "description": "Lezione-spettacolo che spiega il funzionamento reale dell'Intelligenza Artificiale a studenti, docenti e genitori, unendo rigore scientifico e ironia. In collaborazione con l'Università di Salerno.",
-      "startDate": "2026-10-04T18:30:00+02:00",
-      "endDate": "2026-10-04T20:30:00+02:00",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "image": "https://www.teatrodellescienze.it/assets/gallery/foto_15.jpg",
-      "location": {
-        "@type": "Place",
-        "name": "Teatro 99 Posti",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Via Traversa 91, Torelli di Mercogliano",
-          "addressLocality": "Mercogliano",
-          "addressRegion": "AV",
-          "postalCode": "83013",
-          "addressCountry": "IT"
-        }
-      },
-      "performer": [
-        { "@type": "Person", "name": "Paolo Capozzo" },
-        { "@type": "Person", "name": "Antonio Colucci" }
-      ],
-      "organizer": {
-        "@type": "PerformingGroup",
-        "name": "Teatro delle Scienze",
-        "url": "https://www.teatrodellescienze.it/"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "validFrom": "2026-07-06T00:00:00+02:00",
-        "url": "https://www.teatrodellescienze.it/prenota"
-      }
-    }
-    </script>
 
     <!-- Dati strutturati: la compagnia (per il knowledge graph di Google) -->
     <script type="application/ld+json">
@@ -137,7 +94,7 @@
                 <a href="#galleria" class="nav-link">Galleria</a>
                 <a href="#playlist" class="nav-link">Musiche</a>
                 <a href="#chi-siamo" class="nav-link">Chi siamo</a>
-                <a href="/prenota" class="btn btn-nav">Prenota</a>
+                <a href="#contatti" class="btn btn-nav">Contattaci</a>
             </nav>
             <button class="burger-menu" id="burgerMenu" aria-label="Apri menu">
                 <i class="fa-solid fa-bars"></i>
@@ -156,9 +113,6 @@
                     <p><span class="credit-role">con</span> Antonio Colucci e Paolo Capozzo</p>
                     <p><span class="credit-role">Consulenza scientifica</span> prof.ssa Monica Sebillo — Dip. Informatica UNISA</p>
                     <p><span class="credit-role">Resp. progetto</span> prof. Saverio Tortoriello — Dip. Matematica UNISA</p>
-                </div>
-                <div class="hero-actions">
-                    <a href="/prenota" class="btn btn-primary">Prenota l'Anteprima Docenti</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -483,8 +437,7 @@
     </section>
 
 
-    <!-- Contatti generali / Richiesta spettacolo per la scuola.
-         La prenotazione dei posti per l'anteprima è sulla pagina dedicata /prenota. -->
+    <!-- Contatti generali / Richiesta spettacolo per la scuola. -->
     <section id="contatti" class="contatti-section">
         <div class="container">
 
@@ -502,8 +455,6 @@
                 <p class="contatti-desc">
                     Scopri il percorso, guarda il trailer e richiedi una data per il tuo istituto. Scrivici: fissiamo insieme la replica per le tue classi.
                 </p>
-                <p class="contatti-highlight"><strong>Prenota subito il tuo posto all'Anteprima Docenti</strong></p>
-                <a href="/prenota" class="btn btn-primary contatti-cta">Prenota l'Anteprima Docenti</a>
             </div>
             <div class="contatti-form-col">
                 <div class="contatti-form-wrapper">
