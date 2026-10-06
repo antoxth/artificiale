@@ -55,7 +55,9 @@
     .hero h1 { font-family: var(--display); font-size: clamp(32px, 6vw, 50px); line-height: 1.1; margin: 14px auto 0; max-width: 760px; }
     .hero h1 span { color: var(--gold); }
     .hero p.lead { color: #cbd5e1; font-size: 17px; max-width: 620px; margin: 18px auto 0; }
-    .hero .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+    .download { background: var(--dark); color: #fff; border-radius: 18px; padding: 34px 26px; text-align: center; margin: 4px 0 0; }
+    .download h2 { font-family: var(--display); font-size: clamp(24px, 4vw, 30px); line-height: 1.2; }
+    .download p { color: #cbd5e1; max-width: 520px; margin: 12px auto 22px; }
 
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 22px; border-radius: 9px; font-weight: 600; font-size: 15px; text-decoration: none; transition: background .2s, color .2s, border-color .2s; cursor: pointer; font-family: var(--font); }
     .btn-gold { background: var(--gold); color: #fff; border: 1.5px solid var(--gold); }
@@ -176,9 +178,6 @@
     <p class="kicker">Anteprima Docenti · Teatro 99 Posti · 4 ottobre 2026</p>
     <h1>Quello che Clara ha creato <span>con voi</span></h1>
     <p class="lead">Durante la lezione-spettacolo le richieste a Clara, l'intelligenza artificiale in scena, sono nate dai suggerimenti del pubblico in sala. Qui trovate tutto quello che è stato generato in diretta quella sera, insieme ai prompt che lo hanno prodotto.</p>
-    <div class="actions">
-      <a class="btn btn-gold" href="assets/anteprima/Artificiale-sara-lei-4-ottobre-2026.zip" download><i class="fa-solid fa-file-zipper"></i> Scarica tutto <small>(ZIP, 15 MB)</small></a>
-    </div>
   </section>
 
   <main class="wrap">
@@ -319,6 +318,12 @@
       </div>
     </section>
 
+    <!-- Download completo in fondo alla pagina, dopo aver visto tutte le opere (scelta di Antonio) -->
+    <section class="download">
+      <h2>Scarica tutto il materiale</h2>
+      <p>Poesia, dipinto, canzone, immagine, video e tutti i prompt della serata in un unico file.</p>
+      <a class="btn btn-gold" href="assets/anteprima/Artificiale-sara-lei-4-ottobre-2026.zip" download><i class="fa-solid fa-file-zipper"></i> Scarica tutto <small>(ZIP, 15 MB)</small></a>
+    </section>
   </main>
 
   <footer>
