@@ -235,7 +235,7 @@
               <p class="prompt-text">Genera un dipinto basato sulla poesia appena generata, con la tecnica dell’acquerello e lo stile di Picasso.</p>
             </div>
             <div class="media">
-              <a href="assets/anteprima/la-scuola-a-teatro-con-l-ai-dipinto.jpg" class="zoomable">
+              <a href="assets/anteprima/la-scuola-a-teatro-con-l-ai-dipinto-grande.webp" class="zoomable">
                 <img src="assets/anteprima/la-scuola-a-teatro-con-l-ai-dipinto.webp" width="1600" height="873" loading="lazy" alt="Acquerello in stile cubista: un uomo malinconico seduto con dei libri guarda un robot luminoso sul palco di un teatro, davanti a un pubblico stupito. In alto la scritta: La scuola a teatro con l'AI, novo error, sol ne resta il nome.">
                 <span class="zoom"><i class="fa-solid fa-magnifying-glass-plus"></i> Ingrandisci</span>
               </a>
@@ -289,7 +289,7 @@
               <p class="prompt-text">Genera una foto in stile fotorealistico di un gatto con il pelo arancione e rosso e con dei pois neri, seduto al parco su una panchina mentre guarda dei topi giocare.</p>
             </div>
             <div class="media">
-              <a href="assets/anteprima/il-gatto-al-parco.jpg" class="zoomable">
+              <a href="assets/anteprima/il-gatto-al-parco-grande.webp" class="zoomable">
                 <img src="assets/anteprima/il-gatto-al-parco.webp" width="1600" height="873" loading="lazy" alt="Foto realistica di un gatto arancione con macchie nere seduto su una panchina in un parco d'autunno, mentre alcuni topolini corrono sul vialetto pieno di foglie.">
                 <span class="zoom"><i class="fa-solid fa-magnifying-glass-plus"></i> Ingrandisci</span>
               </a>
@@ -469,11 +469,19 @@
         box.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('no-scroll');
       }
+      var current = null;
       document.querySelectorAll('a.zoomable').forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
-          img.src = a.getAttribute('href');
-          img.alt = a.querySelector('img').alt;
+          current = a;
+          // Subito l'immagine già caricata nella pagina (nessuna attesa), poi la versione
+          // più nitida (-grande.webp, ~0,3–0,6 MB) appena arriva.
+          var thumb = a.querySelector('img');
+          img.src = thumb.currentSrc || thumb.src;
+          img.alt = thumb.alt;
+          var big = new Image();
+          big.onload = function () { if (current === a && box.classList.contains('active')) img.src = big.src; };
+          big.src = a.getAttribute('href');
           box.classList.add('active');
           box.setAttribute('aria-hidden', 'false');
           document.body.classList.add('no-scroll');
