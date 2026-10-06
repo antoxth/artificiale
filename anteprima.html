@@ -64,7 +64,7 @@
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
     .btn small { font-weight: 500; opacity: .75; }
 
-    .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 56px; }
     section.block { padding: 56px 0 8px; }
     .block-head { text-align: center; margin-bottom: 32px; }
     .block-head h2 { font-family: var(--display); font-size: clamp(26px, 4.5vw, 34px); line-height: 1.2; }
@@ -135,10 +135,12 @@
     body.no-scroll { overflow: hidden; }
     .note { color: var(--muted); font-size: 14.5px; margin-top: 14px; }
 
-    .cta { background: var(--dark); color: #fff; border-radius: 18px; padding: 36px 26px; text-align: center; margin: 56px 0 64px; }
+    .cta { background: var(--gold-light); border: 1px solid #eadfbf; color: var(--ink); border-radius: 18px; padding: 34px 26px; text-align: center; margin: 40px 0 0; }
     .cta h2 { font-family: var(--display); font-size: clamp(24px, 4vw, 30px); line-height: 1.2; }
-    .cta h2 span { color: var(--gold); }
-    .cta p { color: #cbd5e1; max-width: 560px; margin: 14px auto 0; }
+    .cta h2 span { color: var(--gold-dark); }
+    .cta p { color: #374151; max-width: 580px; margin: 14px auto 0; }
+    .btn-ghost-dark { background: #fff; color: var(--ink); border: 1.5px solid #cbd5e1; }
+    .btn-ghost-dark:hover { border-color: var(--gold); color: var(--gold-dark); }
     .cta .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
 
     footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 28px 20px; font-size: 14px; }
@@ -147,7 +149,7 @@
 
     @media (max-width: 560px) {
       .hero { padding: 44px 16px 52px; }
-      .wrap { padding: 0 16px; }
+      .wrap { padding: 0 16px 48px; }
       .step { padding-left: 0; }
       .step::before { display: none; }
       .step-num { position: static; margin-bottom: 12px; box-shadow: none; }
@@ -180,6 +182,15 @@
   </section>
 
   <main class="wrap">
+    <!-- In cima, prima dei materiali: è l'invito che deve essere letto per primo (scelta di Antonio) -->
+    <section class="cta">
+      <h2>Portiamo lo spettacolo <span>nella vostra scuola</span></h2>
+      <p><em>Artificiale sarà lei</em> nasce come sperimentazione didattica e si rivolge soprattutto ai ragazzi delle scuole secondarie di II grado, ma anche ai loro genitori e ai loro docenti. Se pensate che sia adatta ai vostri studenti, scriveteci: valuteremo insieme data, logistica, numero di repliche e costo per studente.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="/#contatti"><i class="fa-solid fa-envelope"></i> Contattaci</a>
+        <a class="btn btn-ghost-dark" href="/"><i class="fa-solid fa-masks-theater"></i> Scopri lo spettacolo</a>
+      </div>
+    </section>
     <section class="block" id="creazioni">
       <div class="block-head">
         <h2>Le creazioni della serata</h2>
@@ -308,14 +319,6 @@
       </div>
     </section>
 
-    <section class="cta">
-      <h2>Portiamo lo spettacolo <span>nella vostra scuola</span></h2>
-      <p><em>Artificiale sarà lei</em> nasce come sperimentazione didattica e si rivolge soprattutto ai ragazzi delle scuole secondarie di II grado, ma anche ai loro genitori e ai loro docenti. Se pensate che sia adatta ai vostri studenti, scriveteci: valuteremo insieme data, logistica, numero di repliche e costo per studente.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href="/#contatti"><i class="fa-solid fa-envelope"></i> Contattaci</a>
-        <a class="btn btn-ghost" href="/"><i class="fa-solid fa-masks-theater"></i> Scopri lo spettacolo</a>
-      </div>
-    </section>
   </main>
 
   <footer>
