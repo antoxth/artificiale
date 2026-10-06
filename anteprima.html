@@ -132,6 +132,8 @@
     .lightbox { position: fixed; inset: 0; background: rgba(18,18,18,.95); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity .3s ease-in-out; padding: 70px 16px 24px; }
     .lightbox.active { opacity: 1; pointer-events: all; }
     .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.1); }
+    .lightbox img { transition: opacity .15s; }
+    .lightbox img.is-loading { opacity: 0; }
     .lightbox-close { position: absolute; top: 16px; right: 16px; display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--dark); border: none; border-radius: 8px; padding: 9px 16px; font-family: var(--font); font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s; }
     .lightbox-close:hover { background: #fff; }
     body.no-scroll { overflow: hidden; }
@@ -464,12 +466,18 @@
     (function () {
       var box = document.getElementById('lightbox');
       var img = document.getElementById('lightboxImg');
+      var current = null;
       function close() {
         box.classList.remove('active');
         box.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('no-scroll');
+        // Svuota il riquadro: altrimenti (Safari su iPhone) alla prossima apertura resta
+        // visibile la foto precedente finché la nuova non è pronta.
+        current = null;
+        img.removeAttribute('src');
       }
-      var current = null;
+      // L'immagine compare solo quando quella giusta è caricata
+      img.addEventListener('load', function () { img.classList.remove('is-loading'); });
       document.querySelectorAll('a.zoomable').forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
@@ -477,7 +485,9 @@
           // Subito l'immagine già caricata nella pagina (nessuna attesa), poi la versione
           // più nitida (-grande.webp, ~0,3–0,6 MB) appena arriva.
           var thumb = a.querySelector('img');
+          img.classList.add('is-loading');
           img.src = thumb.currentSrc || thumb.src;
+          if (img.complete && img.naturalWidth) img.classList.remove('is-loading');
           img.alt = thumb.alt;
           var big = new Image();
           big.onload = function () { if (current === a && box.classList.contains('active')) img.src = big.src; };
