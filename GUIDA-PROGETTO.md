@@ -246,14 +246,16 @@ git push origin main
 
 > **★ `/anteprima` — materiali generati in diretta (dal 5 ottobre 2026).**
 > - `anteprima.html` + `assets/anteprima/`: poesia, dipinto, canzone, immagine e video creati con il
->   pubblico, ognuno con il suo prompt; un solo download, lo zip "Scarica tutto". `noindex`, nessun
+>   pubblico, ognuno con il suo prompt; un solo download, lo zip "Scarica tutto" in fondo. `noindex`, nessun
 >   link dal sito, fuori dalla sitemap: ci si arriva dal link della mail post-spettacolo.
-> - **Contatore**: lo script della pagina manda visite e clic su "Scarica tutto" a `/api/track`
->   (tabella `page_events`, `db/page_events.sql`). I link nelle due mail sono
->   `/anteprima?m=presenti` e `/anteprima?m=assenti`; i numeri si vedono in `/admin` (sezione in
->   alto), con la percentuale calcolata su `anteprimaMailRecipients` in `lib/event.js`.
->   Il browser di chi apre `/admin` non viene più contato. Con `api/track.js` le funzioni sono 12:
->   il massimo del piano Hobby, quindi una funzione nuova va accorpata a una esistente.
+> - **Contatore visite del sito**: la home e `/anteprima` mandano ogni apertura a `/api/track`
+>   (tabella `page_events`, `db/page_events.sql`; solo un identificativo casuale del browser).
+>   I link nelle due mail sono `/anteprima?m=presenti` e `/anteprima?m=assenti`. In `/admin`
+>   (sezione in alto "Visite al sito"): visualizzazioni e visitatori unici di tutto il sito, della
+>   home e di `/anteprima`, più quanti arrivano da ciascuna mail, in % su `anteprimaMailRecipients`
+>   (`lib/event.js`). Il browser di chi apre `/admin` non viene più contato. Con `api/track.js`
+>   le funzioni sono 12: il massimo del piano Hobby, quindi una funzione nuova va accorpata a una
+>   esistente. (Vercel Web Analytics è attivo a parte, nel pannello di Vercel.)
 
 Guida completa: **`SETUP-PRENOTAZIONI.md`**. In sintesi:
 

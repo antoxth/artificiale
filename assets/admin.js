@@ -102,7 +102,7 @@
     loadTrack();
   }
 
-  // ---- Contatore pagina /anteprima ----
+  // ---- Contatore visite del sito (home + /anteprima) ----
 
   async function loadTrack() {
     if (!$('trackAdmin')) return;
@@ -116,24 +116,32 @@
   }
 
   function renderTrack(data) {
-    const by = {};
-    for (const r of data.bySource) by[r.source] = r;
+    const page = {};
+    for (const r of data.byPage) page[r.page] = r;
+    const src = {};
+    for (const r of data.anteprimaBySource) src[r.source] = r;
     const rec = data.recipients || {};
-    const group = (key, label) => {
-      const n = by[key] ? by[key].visitors : 0;
-      $('tr' + label).textContent = n;
+    const n = (o, k) => (o ? o[k] : 0);
+
+    $('trSiteViews').textContent = data.site.views;
+    $('trSiteVisitors').textContent = data.site.visitors;
+    $('trHomeViews').textContent = n(page.home, 'views');
+    $('trHomeVisitors').textContent = n(page.home, 'visitors');
+    $('trAntViews').textContent = n(page.anteprima, 'views');
+    $('trAntVisitors').textContent = n(page.anteprima, 'visitors');
+
+    const group = (key, label, base) => {
+      const v = n(src[key], 'visitors');
+      $('tr' + label).textContent = v;
       const tot = rec[key];
-      const base = key === 'presenti' ? 'Dalla mail ai presenti' : 'Dalla mail agli assenti';
-      $('tr' + label + 'L').textContent = tot ? `${base} · ${Math.round((n / tot) * 100)}% di ${tot}` : base;
+      $('tr' + label + 'L').textContent = tot ? `${base} · ${Math.round((v / tot) * 100)}% di ${tot}` : base;
     };
-    group('presenti', 'Presenti');
-    group('assenti', 'Assenti');
-    $('trVisitors').textContent = data.totals.visitors;
-    $('trDownloads').textContent = data.totals.downloaders;
-    const direct = by.diretto ? by.diretto.visitors : 0;
-    const last = data.totals.last_at ? ` · Ultima visita: ${itDate(data.totals.last_at)}` : '';
-    $('trNote').textContent =
-      `Aperture totali, comprese quelle ripetute: ${data.totals.views} · Arrivati senza il link della mail: ${direct}${last}`;
+    group('presenti', 'Presenti', 'Dalla mail ai presenti');
+    group('assenti', 'Assenti', 'Dalla mail agli assenti');
+
+    const direct = n(src.diretto, 'visitors');
+    const last = data.site.last_at ? ` · Ultima visita al sito: ${itDate(data.site.last_at)}` : '';
+    $('trNote').textContent = `Visitatori di /anteprima arrivati senza il link della mail: ${direct}${last}`;
   }
 
   // ---- Lista d'attesa ----

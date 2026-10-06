@@ -1,5 +1,6 @@
--- Contatore della pagina /anteprima (ottobre 2026): visite e download dei materiali,
--- per misurare quante persone aprono il link della mail post-spettacolo.
+-- Contatore delle visite del sito (ottobre 2026): home e pagina /anteprima (materiali),
+-- anche per misurare quante persone aprono il link della mail post-spettacolo.
+-- (Il valore 'download' resta ammesso ma non è più usato dal 6/10/2026.)
 -- È solo un'aggiunta: non tocca le tabelle reservations e waitlist.
 --
 -- Nessun dato personale: `visitor` è un identificativo casuale generato nel browser

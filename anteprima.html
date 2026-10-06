@@ -484,7 +484,7 @@
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('active')) close(); });
     })();
 
-    // Contatore visite e download (/api/track), per sapere quanti aprono il link della mail.
+    // Contatore visite (/api/track), per sapere quanti aprono il link della mail.
     // I link nelle mail sono /anteprima?m=presenti e /anteprima?m=assenti. Nessun dato personale:
     // solo un identificativo casuale del browser per contare i visitatori unici.
     (function () {
@@ -513,9 +513,6 @@
         fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
       }
       send('view');
-      document.querySelectorAll('a[href$=".zip"]').forEach(function (a) {
-        a.addEventListener('click', function () { send('download'); });
-      });
     })();
   </script>
 </body>
