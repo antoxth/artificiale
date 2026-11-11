@@ -369,9 +369,10 @@ img {
     margin: 0 0 20px;
 }
 
+/* Una sola colonna dall'11/11/2026 (richiesta di Antonio) */
 .scuole-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 28px;
 }
 
